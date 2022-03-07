@@ -1,0 +1,11 @@
+<div class="list-group" *ngIf="restaurants">
+    <nav *ngFor="let restaurant of restaurants" [routerLink]="['/restaurant', restaurant.id]"
+        (click)="onSelect(restaurant)" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{restaurant.name}}</h5>
+            <small>{{restaurant.type}}</small>
+        </div>
+        <div class="mb-1">pricing: {{restaurant.pricing}}/5</div>
+        <small>rating: {{restaurant.rating}}</small>
+    </nav>
+</div>
