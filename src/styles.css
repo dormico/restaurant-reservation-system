@@ -49,7 +49,7 @@
   --bs-info-rgb: 28, 171, 196;
   --bs-warning-rgb: 228, 198, 98;
   --bs-danger-rgb: 161, 100, 104;
-  --bs-light-rgb: 248, 249, 250;
+  --bs-light-rgb: 232, 233, 235;
   --bs-dark-rgb: 64, 64, 64;
   --bs-black-rgb: 0, 0, 0;
   --bs-white-rgb: 255, 255, 255;
@@ -80,6 +80,7 @@
 }
 
 body {
+  padding-top: 3rem;
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
@@ -302,7 +303,8 @@ figure {
 img,
 svg {
   vertical-align: middle;
-  /*fill: rgb(100, 180, 180)*/
+  fill: rgb(100, 180, 180);
+  color: rgb(5, 122, 139);
 }
 
 table {
@@ -11665,4 +11667,10 @@ body {
   padding: 0rem 0;
   color: var(--bs-primary);
   background-color: var(--bs-secondary);
+}
+.ratings {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem, Restaurant, Review } from 'src/app/models/restaurant.type';
+import { Restaurant } from 'src/app/models/restaurant.type';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({
   selector: 'app-restaurants-list',
@@ -9,72 +10,25 @@ import { MenuItem, Restaurant, Review } from 'src/app/models/restaurant.type';
 export class RestaurantsListComponent implements OnInit {
 
   restaurants: Restaurant[];
-  foods: MenuItem[]
 
-  constructor() { }
+  constructor(private restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
-    this.foods = [
-      {
-        name: "Dish 1",
-        description: "Description",
-        price: 123
-      },
-      {
-        name: "Dish 2",
-        description: "Description",
-        price: 123
-      },
-      {
-        name: "Dish 3",
-        description: "Description",
-        price: 123
-      }
-    ]
+    this.getMockRestaurantsList();
+  }
+  public getMockRestaurantsList() {
+    this.restaurants = this.restaurantService.getMockRestaurants();
+  }
+  public getRestaurantsList() {
+    this.restaurantService.getRestaurants()
+      .subscribe(re => this.restaurants = re);
+  }
+  public getRestaurantByName(name: string) {
+    this.restaurantService.getRestaurantByName(name)
+      .subscribe(re => this.restaurants = re);
+  }
 
-    this.restaurants = [
-      {
-        id: 1,
-        name: "French Fries",
-        address: "Address street 3.",
-        phone: "+12 3 456 78",
-        email: "fries@email.com",
-        takeaway: true,
-        cardnum: 11111111111111,
-        opening: 8,
-        closing: 20,
-        menu: this.foods,
-        pricing: 3,
-        rating: 4
-      },
-      {
-        id: 2,
-        name: "Pasta Italiana",
-        address: "Address street 2.",
-        phone: "+12 3 456 78",
-        email: "pasta@email.com",
-        takeaway: true,
-        cardnum: 11111111111111,
-        opening: 8,
-        closing: 20,
-        menu: this.foods,
-        pricing: 3,
-        rating: 4
-      },
-      {
-        id: 3,
-        name: "Gulyás csárda",
-        address: "Address street 15.",
-        phone: "+12 3 456 78",
-        email: "csarda@email.com",
-        takeaway: true,
-        cardnum: 11111111111111,
-        opening: 8,
-        closing: 20,
-        menu: this.foods,
-        pricing: 3,
-        rating: 4
-      }
-    ]
+  public times(n: number) :  Array<number>{
+    return Array(n);
   }
 }

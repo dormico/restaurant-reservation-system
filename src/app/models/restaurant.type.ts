@@ -1,5 +1,3 @@
-import { MenuComponent } from "../components/guest-components/menu/menu.component"
-
 export interface Restaurant{
     id: number
     name: String
@@ -15,7 +13,7 @@ export interface Restaurant{
 
     image?: string
     website?: string
-    type?: KitchenType[]
+    style?: string
     reviews?: Review[],
     rating?: number
 }
@@ -28,12 +26,13 @@ export interface MenuItem{
 }
 
 export interface Review{
+    date: string
     rating: number
     text?: string
     answer?: string
 }
 
-export enum KitchenType{
+enum KitchenStyle{
     "chinese",
     "fine dining",
     "hungarian",

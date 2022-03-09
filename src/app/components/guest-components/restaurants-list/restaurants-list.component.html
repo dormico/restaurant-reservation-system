@@ -1,11 +1,36 @@
 <div class="list-group" *ngIf="restaurants">
+    <div class="d-flex w-100 justify-content-between row">
+        <div class="col-2"></div>
+        <h5 class="mb-1 col-2 b-2 display-8">Name</h5>
+        <h5 class="col-2"></h5>
+        <h5 class="col-2 display-8">Style</h5>
+        <h5 class="mb-1 col-2 display-8">Pricing</h5>
+        <h5 class="col-2 display-8">Rating</h5>
+    </div>
     <nav *ngFor="let restaurant of restaurants" [routerLink]="['/restaurant', restaurant.id]"
-        (click)="onSelect(restaurant)" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{restaurant.name}}</h5>
-            <small>{{restaurant.type}}</small>
+        (click)="onSelect(restaurant)" class="list-group-item list-group-item-action flex-column d-flex ">
+        <div class="row">
+            <div class="col-2 text-center"><img src="{{restaurant.image}}" width=100 alt="Restaurant"></div>
+            <h5 class="mb-1 col-2 display-8">{{restaurant.name}}</h5>
+            <div class="col-2"></div>
+            <small class="col-2 text-muted">{{restaurant.style}}</small>
+            <div class="col-2">
+                <div class="ratings">
+                    <div *ngFor="let price of times(restaurant.pricing)" class="p-0">
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" alt=""/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="ratings">
+                    <div *ngFor="let rate of times(restaurant.rating)" class="p-0">
+                        <img src="{{'../assets/icons/star-fill.svg'}}" alt=""/>
+                    </div>
+                    <div *ngFor="let rate of times(5-restaurant.rating)" class="p-0">
+                        <img src="{{'../assets/icons/star.svg'}}" alt=""/>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-1">pricing: {{restaurant.pricing}}/5</div>
-        <small>rating: {{restaurant.rating}}</small>
     </nav>
 </div>
