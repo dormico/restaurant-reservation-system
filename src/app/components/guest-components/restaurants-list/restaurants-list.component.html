@@ -1,15 +1,7 @@
 <div class="list-group" *ngIf="restaurants">
-    <div class="d-flex w-100 justify-content-between row">
-        <div class="col-2"></div>
-        <h5 class="mb-1 col-2 b-2 display-8">Name</h5>
-        <h5 class="col-2"></h5>
-        <h5 class="col-2 display-8">Style</h5>
-        <h5 class="mb-1 col-2 display-8">Pricing</h5>
-        <h5 class="col-2 display-8">Rating</h5>
-    </div>
     <nav *ngFor="let restaurant of restaurants" [routerLink]="['/restaurant', restaurant.id]"
         (click)="onSelect(restaurant)" class="list-group-item list-group-item-action flex-column d-flex ">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-2 text-center"><img src="{{restaurant.image}}" width=100 alt="Restaurant"></div>
             <h5 class="mb-1 col-2 display-8">{{restaurant.name}}</h5>
             <div class="col-2"></div>

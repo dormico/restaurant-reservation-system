@@ -1,6 +1,6 @@
 <div *ngIf="restaurant" class="row">
     <div class="card col-6">
-        <h3 class="card-header text-center">{{restaurant.name | uppercase}}</h3>
+        <div class="card-header text-center display-6">{{restaurant.name | uppercase}}</div>
         <img src="{{restaurant.image}}" alt="Restaurant">
         <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -106,7 +106,15 @@
         </div>
     </div>
     <div class="card col-6">
-        MENU HERE...
+        <div class="display-6 text-center card-header">MENU</div>
+        <nav *ngFor="let food of restaurant.menu" class="list-group-item list-group-item-action flex-column d-flex ">
+            <div class="row align-items-center">
+                <h5 class="mb-1 col display-8">{{food.name}}</h5>
+                <small class="col-2 text-muted">{{food.price | currency }}</small>
+            </div>
+        </nav>
+        <div class="btn btn-secondary" style="position: fixed; bottom: 2rem; right: 2rem;"
+            (click)="gotoOrder(restaurant)"  [routerLink]="['/restaurant', restaurant.id, 'menu']">ORDER HERE</div>
     </div>
 </div>
 

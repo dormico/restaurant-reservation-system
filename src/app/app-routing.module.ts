@@ -7,6 +7,7 @@ import { NewGuestComponent } from './components/guest-components/new-guest/new-g
 import { RestaurantDetailsComponent } from './components/guest-components/restaurant-details/restaurant-details.component';
 import { RestaurantsListComponent } from './components/guest-components/restaurants-list/restaurants-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NewRestaurantComponent } from './components/restaurant-components/new-restaurant/new-restaurant.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register/guest', component: NewGuestComponent },
   { path: 'register/restaurant', component: NewRestaurantComponent },
+  { path: 'newpass', component: NewPasswordComponent },
   
   { path: 'search', component: RestaurantsListComponent },
   { path: 'restaurant/:id', component: RestaurantDetailsComponent },

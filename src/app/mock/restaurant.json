@@ -12,19 +12,19 @@
             "closing": 20,
             "menu": [
                 {
-                    "name": "Dish 1",
+                    "name": "Soup",
                     "description": "Description",
-                    "price": 123
+                    "price": 12
                 },
                 {
-                    "name": "Dish 2",
+                    "name": "Main dish",
                     "description": "Description",
-                    "price": 123
+                    "price": 20
                 },
                 {
-                    "name": "Dish 3",
+                    "name": "Dessert",
                     "description": "Description",
-                    "price": 123
+                    "price": 1
                 }
             ],
             "pricing": 3,
@@ -64,19 +64,19 @@
             "closing": 20,
             "menu": [
                 {
-                    "name": "Dish 1",
+                    "name": "Soup",
                     "description": "Description",
-                    "price": 123
+                    "price": 12
                 },
                 {
-                    "name": "Dish 2",
+                    "name": "Main dish",
                     "description": "Description",
-                    "price": 123
+                    "price": 20
                 },
                 {
-                    "name": "Dish 3",
+                    "name": "Dessert",
                     "description": "Description",
-                    "price": 123
+                    "price": 1
                 }
             ],
             "pricing": 5,
@@ -116,19 +116,19 @@
             "closing": 20,
             "menu": [
                 {
-                    "name": "Dish 1",
+                    "name": "Soup",
                     "description": "Description",
-                    "price": 123
+                    "price": 12
                 },
                 {
-                    "name": "Dish 2",
+                    "name": "Main dish",
                     "description": "Description",
-                    "price": 123
+                    "price": 20
                 },
                 {
-                    "name": "Dish 3",
+                    "name": "Dessert",
                     "description": "Description",
-                    "price": 123
+                    "price": 1
                 }
             ],
             "pricing": 2,
