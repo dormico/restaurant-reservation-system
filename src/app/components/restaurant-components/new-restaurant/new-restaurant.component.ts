@@ -12,4 +12,7 @@ export class NewRestaurantComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(form){
+    
+  }
 }

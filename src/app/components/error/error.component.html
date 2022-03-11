@@ -1,0 +1,10 @@
+<div *ngIf="errors" class="alert">
+    <div *ngIf="errors.email">
+        <div>E-mail required</div>
+    </div>
+</div>
+<div *ngIf="errors" class="alert">
+    <div *ngIf="errors.minlength">
+        <div>Password has to be at least 8 characters long.</div>
+    </div>
+</div>

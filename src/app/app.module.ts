@@ -20,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

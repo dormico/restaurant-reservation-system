@@ -1,0 +1,19 @@
+{
+    "guests": [
+        {
+            "username": "Asd",
+            "password": "asd",
+            "email": "asd@email.com"
+        },
+        {
+            "username": "Józsi",
+            "password": "joska",
+            "email": "joska@email.com"
+        },
+        {
+            "username": "Pista",
+            "password": "pista",
+            "email": "pista@email.com"
+        }
+    ]
+}

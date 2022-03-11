@@ -1,9 +1,12 @@
 <nav class="fixed-top align-items-center mb-4 bg-masthead">
     <div class="container container-xl d-flex align-items-center justify-content-lg-between">
         <a class="nav-link display-6 text-light" [routerLink]="'/search'">Allegro</a>
-        <a class="nav-item nav-link display-6 col text-end text-light" [routerLink]="'/login'">Login</a>
-        <div class="col-1">
-            <img src="{{'../assets/icons/person.svg'}}" width="36" alt=""/>
+        <a *ngIf="!guest" class="nav-item nav-link display-6 col text-end text-light" [routerLink]="'/login'">Login</a>
+        <div *ngIf="guest">
+            <a class="nav-item nav-link display-6 col text-end text-light">{{guest.username}}</a>
+            <div class="col-1">
+                <img src="{{'../assets/icons/person.svg'}}" width="36" alt=""/>
+            </div>
         </div>
     </div>
 </nav>
