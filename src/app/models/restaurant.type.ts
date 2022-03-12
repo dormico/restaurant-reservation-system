@@ -19,6 +19,7 @@ export interface Restaurant{
 }
 
 export interface MenuItem{
+    dishId: number
     name: string
     description: string
     price: number

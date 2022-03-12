@@ -20,12 +20,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit() {
-    this.authService.getGuest(this.guest)
+    this.authService.getGuestName(this.guest)
       .subscribe(
         g => {
           if (g.email !== "") {
             this.g = g
             console.log("Found user: " + this.g.username)
+            this.authService.setActiveGuest(g);
             let rId = this.cartService.getRestaurantId();
             if (rId != -1) {
               this.router.navigateByUrl("restaurant/" + rId + "/menu")

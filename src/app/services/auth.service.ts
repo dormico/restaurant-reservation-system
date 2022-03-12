@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Guest } from '../models/guest.type';
 import { guests } from '../../app/mock/guests.json';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService {
   constructor() { }
   private nullGuest: Guest = { username: "", email: "", password: "" }
   private guests: Guest[] = guests
-  private activeGuest: Guest
+  private activeGuest = new BehaviorSubject<Guest>(/*null*/{ username: "Asd", email: "asd@email.com", password: "asd" });
 
   public isAuthenticated(): boolean {
 
@@ -25,14 +25,17 @@ export class AuthService {
     return true;
   }
 
-  public getGuest(g: Guest): Observable<Guest> {
-    let guest = guests.find(element => element.email == g.email && element.password == g.password)
+  public getGuestName(g: Guest): Observable<Guest> {
+    let guest = guests.find(element => element.email == g.email && element.password == g.password);
     return guest ? of(guest) : of(this.nullGuest);
   }
   public addGuest(g: Guest){
     this.guests.push(g);
   }
-  public getActiveGuest(): Guest | null {
-    return this.activeGuest ? this.activeGuest : null;
+  public getActiveGuest(): Observable<Guest> {
+    return this.activeGuest.asObservable();
+  }
+  public setActiveGuest(g: Guest) {
+    this.activeGuest.next(g);
   }
 }

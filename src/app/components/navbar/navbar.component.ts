@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Guest } from 'src/app/models/guest.type';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,17 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  //TODO: Subscribe to modifications
-  guest: Guest | null
+  public guest: Guest
+  
+  private unsubscribe: Subject<any> = new Subject<any>();
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getGuest()
+    this.authService.getActiveGuest()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(g => this.guest = g);
   }
-  private getGuest(){
-    this.guest = this.authService.getActiveGuest()
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }
