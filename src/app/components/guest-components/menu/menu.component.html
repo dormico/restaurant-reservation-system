@@ -1,23 +1,36 @@
 <div class="row card-group mx-4" *ngIf="menu">
     <div class="col-md-3 my-2" *ngFor="let dish of menu">
         <div class="card h-100">
-            <div class="card-image">
-                <img src="{{dish.image}}" class="card-img" alt="dish">
-                <div class="card-img-overlay text-white">
-                    <h5 class="card-title">{{dish.name | uppercase}}</h5>
-                    <p class="card-text">{{dish.price | currency}}</p>
+            <img src="{{dish.image}}" class="card-img-top" alt="dish">
+            <div class="card-img-overlay text-secondary ">
+                <div
+                    class="d-flex justify-content-between align-items-center bg-masthead bg-gradient bg-opacity-50 rounded">
+                    <h5 class="card-title display-8 mb-0 mx-2">{{dish.name | uppercase}}</h5>
+                    <p class="card-text display-8 mx-2">{{dish.price | currency}}</p>
                 </div>
             </div>
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <img src="{{'../assets/icons/dash-square.svg'}}" width="36" alt="plus" (click)="removeDish(dish.dishId)" />
-                <H5 class="m-0 text-muted">{{getDishCount(dish.DishId)}}</H5>
-                <img src="{{'../assets/icons/plus-square.svg'}}" width="36" alt="plus" (click)="addDish(dish.dishId)" />
+            <div class="card-header d-flex justify-content-between align-items-center bg-light rounded">
+                <div class="btn p-0" (click)="removeDish(dish.dishId)">
+                    <img src="{{'../assets/icons/dash-square.svg'}}" width="36" alt="plus" />
+                </div>
+                <!-- <H5 class="m-0 text-muted" *ngIf="order.orders[getOrderIndex(dish.dishId)]">{{order.orders ?
+                    order.orders[getOrderIndex(dish.dishId)].servings : 0}}</H5>
+                <H5 class="m-0 text-muted" *ngIf="!order.orders[getOrderIndex(dish.dishId)]">0</H5> -->
+                <h5 class="m-0 text-muted">{{getDishCount(dish.dishId)}}</h5>
+                <div class="btn p-0" (click)="addDish(dish.dishId)">
+                    <img src="{{'../assets/icons/plus-square.svg'}}" width="36" alt="plus" />
+                </div>
             </div>
             <div class="card-body">
                 <p class="card-text text-center text-muted" *ngIf="dish.description">{{dish.description}}</p>
             </div>
             <div class="card-footer">Total: {{calcSumPrice(dish.dishId, dish.price) | currency}}</div>
         </div>
+    </div>
+    <div class="btn btn-secondary align-items-center p-3 col-2" style="position: fixed; bottom: 2rem; right: 2rem;"
+        [routerLink]="['/cart']" (click)="goToCart()">
+        CHECK OUT
+        <img class="ms-1 mb-1" src="{{'../assets/icons/cart2.svg'}}" width="24" alt="cart" />
     </div>
 </div>
 <div *ngIf="!menu">

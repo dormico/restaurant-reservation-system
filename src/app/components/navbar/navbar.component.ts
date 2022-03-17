@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   public guest: Guest
-  
+
   private unsubscribe: Subject<any> = new Subject<any>();
 
   constructor(private authService: AuthService) { }
@@ -25,5 +25,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+  }
+  public logout(): void {
+    this.authService.logout();
   }
 }

@@ -12,10 +12,10 @@ import { CartService } from 'src/app/services/cart.service';
 export class LoginComponent implements OnInit {
 
   guest: Guest = { email: '', username: '', password: '' }
-  g: Guest = { email: '', username: '', password: '' }
 
   constructor(private authService: AuthService,
-    private router: Router, private cartService: CartService) { }
+    private router: Router, 
+    private cartService: CartService) { }
 
   ngOnInit(): void { }
 
@@ -24,10 +24,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         g => {
           if (g.email !== "") {
-            this.g = g
-            console.log("Found user: " + this.g.username)
+            console.log("Found user: " + g.username)
             this.authService.setActiveGuest(g);
-            let rId = this.cartService.getRestaurantId();
+            let rId = this.cartService.getVisitedId();
             if (rId != -1) {
               this.router.navigateByUrl("restaurant/" + rId + "/menu")
             } else {

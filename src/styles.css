@@ -4732,6 +4732,7 @@ textarea.form-control-lg {
 
 .card-img-overlay {
   position: absolute;
+  height: fit-content;
   top: 0;
   right: 0;
   bottom: 0;
@@ -11674,8 +11675,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.card-img-overlay {
-  width: 100%;
-  height: 15vw;
-  object-fit: cover;
+.svg-filter-light-gray{
+  filter: brightness(0) saturate(100%) invert(90%) sepia(10%) saturate(171%) hue-rotate(173deg) brightness(79%) contrast(87%);
 }

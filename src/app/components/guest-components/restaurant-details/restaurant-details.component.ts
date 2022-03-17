@@ -36,12 +36,10 @@ export class RestaurantDetailsComponent implements OnInit {
         }
       });
   }
-
   public goToOrder(rId: number){
-    this.cartService.setRestaurant(rId)
-    this.router.navigateByUrl('/restaurant/'+ rId + '/menu')
+    this.cartService.setVisitedId(rId);
+    this.router.navigateByUrl('/restaurant/'+ rId + '/menu');
   }
-  
   public times(n: number) :  Array<number>{
     return Array(n);
   }

@@ -10,8 +10,8 @@ export class AuthService {
 
   constructor() { }
   private nullGuest: Guest = { username: "", email: "", password: "" }
-  private guests: Guest[] = guests
-  private activeGuest = new BehaviorSubject<Guest>(/*null*/{ username: "Asd", email: "asd@email.com", password: "asd" });
+  private guests: Guest[] = guests;
+  private activeGuest = new BehaviorSubject<Guest>(null/*{ username: "Asd", email: "asd@email.com", password: "asd" }*/);
 
   public isAuthenticated(): boolean {
 
@@ -22,9 +22,9 @@ export class AuthService {
     //// true or false
     //return !this.jwtHelper.isTokenExpired(token);
 
-    return true;
+    console.log("active guest: " + this.activeGuest.value.username)
+    return this.activeGuest ? true : false;
   }
-
   public getGuestName(g: Guest): Observable<Guest> {
     let guest = guests.find(element => element.email == g.email && element.password == g.password);
     return guest ? of(guest) : of(this.nullGuest);
@@ -33,9 +33,13 @@ export class AuthService {
     this.guests.push(g);
   }
   public getActiveGuest(): Observable<Guest> {
-    return this.activeGuest.asObservable();
+    return this.activeGuest;
   }
   public setActiveGuest(g: Guest) {
     this.activeGuest.next(g);
+  }
+  public logout(): void{
+    this.activeGuest.next(null);
+    console.log("User logged out!");
   }
 }

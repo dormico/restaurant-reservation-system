@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant } from 'src/app/models/restaurant.type';
+import { CartService } from 'src/app/services/cart.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({
@@ -11,10 +12,12 @@ export class RestaurantsListComponent implements OnInit {
 
   restaurants: Restaurant[];
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private restaurantService: RestaurantService, 
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getMockRestaurantsList();
+    this.cartService.removeVisitedId();
   }
   public getMockRestaurantsList() {
     this.restaurants = this.restaurantService.getMockRestaurants();
@@ -27,7 +30,6 @@ export class RestaurantsListComponent implements OnInit {
     this.restaurantService.getRestaurantByName(name)
       .subscribe(re => this.restaurants = re);
   }
-
   public times(n: number) :  Array<number>{
     return Array(n);
   }

@@ -4,7 +4,7 @@ export interface Order{
     restaurantId: number,
     orders: OrderedDish[]
 }
-interface OrderedDish{
+export interface OrderedDish{
     dishId: number,
     servings: number
 }

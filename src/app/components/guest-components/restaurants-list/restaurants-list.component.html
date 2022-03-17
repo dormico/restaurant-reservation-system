@@ -11,6 +11,9 @@
                     <div *ngFor="let price of times(restaurant.pricing)" class="p-0">
                         <img src="{{'../assets/icons/currency-dollar.svg'}}" alt=""/>
                     </div>
+                    <div *ngFor="let price of times(5-restaurant.pricing)" class="p-0">
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" alt="" class="svg-filter-light-gray"/>
+                    </div>
                 </div>
             </div>
             <div class="col-2">
