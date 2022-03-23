@@ -1,5 +1,5 @@
 {
-    "MockRestaurants": [
+    "mockRestaurants": [
         {
             "id": 1,
             "name": "French Fries",
@@ -7,7 +7,7 @@
             "phone": "+12 3 456 78",
             "email": "fries@email.com",
             "takeaway": true,
-            "cardnum": 11111111111111,
+            "cardNum": "11111111111111",
             "opening": 8,
             "closing": 20,
             "menu": [
@@ -86,7 +86,7 @@
             "phone": "+12 3 456 78",
             "email": "pasta@email.com",
             "takeaway": true,
-            "cardnum": 11111111111111,
+            "cardNum": "11111111111111",
             "opening": 8,
             "closing": 20,
             "menu": [
@@ -165,7 +165,7 @@
             "phone": "+12 3 456 78",
             "email": "csarda@email.com",
             "takeaway": true,
-            "cardnum": 11111111111111,
+            "cardNum": "11111111111111",
             "opening": 8,
             "closing": 20,
             "menu": [

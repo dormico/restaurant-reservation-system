@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
+using Azure.Cosmos;
+using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
+using System.Linq;
+using System.Net;
+using System.Collections.Generic;
 
 namespace Restaurant
 {
@@ -15,28 +21,38 @@ namespace Restaurant
   {
     static readonly HttpClient client = new HttpClient();
 
-    [FunctionName("RestaurantsList")]
+    [FunctionName("GetAllRestaurants")]
     public static async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get",
+                Route = null)]HttpRequest req,
+        [CosmosDB(
+                databaseName: "Restaurants",
+                collectionName: "RestaurantItems",
+                ConnectionStringSetting = "CosmosDBConnectionString")] DocumentClient client,
         ILogger log)
     {
       log.LogInformation("C# HTTP trigger function processed a request.");
 
-      string restaurantName = req.Query["name"];
+      Uri collectionUri = UriFactory.CreateDocumentCollectionUri("Restaurants", "RestaurantItems");
 
-      string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-      dynamic data = JsonConvert.DeserializeObject(requestBody);
-      restaurantName = restaurantName ?? data?.name;
+      var itemQuery = client.CreateDocumentQuery<RestaurantItem>(collectionUri);
 
-      string responseJson = string.IsNullOrEmpty(restaurantName)
-          ? string.Format("\"restaurants\":[{{ \"name\": \"FastFooder\", \"style\": \"fast food\" }}, {{ \"name\": \"Pizza Italiana\", \"style\": \"italian\" }}]")
-          : string.Format("\"restaurants\":[{{ \"name\": \"{0}\", \"style\": \"unknown\" }}]", restaurantName);
+      IDocumentQuery<RestaurantItem> query = client.CreateDocumentQuery<RestaurantItem>(collectionUri)
+          .AsDocumentQuery();
 
-      return new OkObjectResult(responseJson);
-      // await client.SendAsync(new HttpResponseMessage(System.Net.HttpStatusCode.OK)
-      // {
-      //   Content = responseJson;
-      // });
+      //var ret = new { Restaurants = itemQuery.ToArray() };
+
+      var rs = new List<RestaurantItem>();
+
+      while (query.HasMoreResults)
+      {
+        foreach (RestaurantItem result in await query.ExecuteNextAsync())
+        {
+          log.LogInformation(result.Name);
+          rs.Add(result);
+        }
+      }
+      return new OkObjectResult(new { Restaurants = rs });
     }
   }
 }

@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Restaurant } from '../models/restaurant.type';
-import { MockRestaurants } from '../../app/mock/restaurant.json';
+import { RestaurantResults } from '../models/test.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
-  private url: string = "https://restaurant-func-app-1.azurewebsites.net/api/restaurantslist"
+  //private url: string = "https://restaurant-func-app-1.azurewebsites.net/api/"
+  private url: string = "http://localhost:7071/api/"
 
   constructor(private http: HttpClient) { }
 
-  public getMockRestaurants(): Restaurant[] {
-    return MockRestaurants;
-  }
-
   public getRestaurantById(id: number): Observable<Restaurant> | null {
-    let rest = MockRestaurants.find(element => element.id == id)
-    return rest ? of(rest) : null
+    let idUrl = this.url +"restaurantitems/"+ id +"/" + id;
+    let r = this.http.get<Restaurant>(idUrl);
+    console.log('fetched restaurants by URL ' + idUrl);
+    console.log('fetched restaurants: ' + r);
+    return r;
   }
-
-  public getRestaurants(): Observable<Restaurant[]> {
-    let rlist = this.http.get<Restaurant[]>(this.url)
-    console.log('fetched restaurants by URL ' + this.url)
-    console.log('fetched films: ' + JSON.stringify(rlist));
+  public getRestaurants(): Observable<RestaurantResults> {
+    let listUrl = this.url + "getallrestaurants";
+    let rlist = this.http.get<RestaurantResults>(listUrl);
+    console.log('fetched restaurants by URL ' + listUrl);
+    console.log('fetched restaurants: ' + rlist);
     return rlist;
   }
   public getRestaurantByName(name: string): Observable<Restaurant[]> {

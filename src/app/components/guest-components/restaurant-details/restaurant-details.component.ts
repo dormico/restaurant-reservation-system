@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurant } from 'src/app/models/restaurant.type';
 import { CartService } from 'src/app/services/cart.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -30,7 +30,7 @@ export class RestaurantDetailsComponent implements OnInit {
     this.restaurantService.getRestaurantById(id)?.subscribe(
       rest => {
         if (rest) {
-          this.restaurant = rest
+          this.restaurant = rest;
         } else {
           this.restaurant = null
         }

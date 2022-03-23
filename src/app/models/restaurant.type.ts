@@ -6,7 +6,7 @@ export interface Restaurant{
     email: string
     takeaway: boolean
     pricing: number
-    cardnum: number
+    cardnum: string
     opening: number
     closing: number 
     menu: MenuItem[]
