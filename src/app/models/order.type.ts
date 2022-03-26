@@ -1,3 +1,5 @@
+import { MenuItem } from "./restaurant.type";
+
 export interface Order{
     id: number,
     guestEmail: string
@@ -5,6 +7,6 @@ export interface Order{
     orders: OrderedDish[]
 }
 export interface OrderedDish{
-    dishId: number,
+    dish: MenuItem,
     servings: number
 }

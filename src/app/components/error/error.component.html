@@ -8,3 +8,8 @@
         <div>Password has to be at least 8 characters long.</div>
     </div>
 </div>
+<div *ngIf="errors" class="alert">
+    <div *ngIf="errors.userNotFound">
+        <div>User not found! Check your e-mail and password.</div>
+    </div>
+</div>

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Order, OrderedDish } from '../models/order.type';
+import { MenuItem, MenuItemResponse } from '../models/restaurant.type';
+import { RestaurantService } from './restaurant.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +11,24 @@ export class CartService {
 
   private visitedRestaurantId: number = -1;
 
+  private menu: MenuItem[] = []
+
   private cart: Order = {
     id: -1,
     guestEmail: '',
     restaurantId: -1,
-    orders: [{ dishId: 0, servings: 0 }]
+    orders: [{
+      dish: {
+        dishId: 0,
+        name: "",
+        description: "",
+        price: 0
+      }, 
+      servings: 0
+    }]
   }
 
-  constructor() { }
+  constructor(private restaurantService: RestaurantService) { }
 
   public setVisitedId(id: number) {
     this.visitedRestaurantId = id;
@@ -23,10 +36,9 @@ export class CartService {
   public getVisitedId(): number {
     return this.visitedRestaurantId;
   }
-  public removeVisitedId(): void{
+  public removeVisitedId(): void {
     this.visitedRestaurantId = -1;
   }
-  
   public newOrder(rId: number, email: string) {
     this.cart = {
       id: Math.trunc(Math.random() * 100000) + 1000,
@@ -44,18 +56,21 @@ export class CartService {
   public setRestaurant(id: number) {
     this.cart.restaurantId = id;
   }
-  public getOrders(): OrderedDish[] {
+  public getOrders(): OrderedDish[]{
+    this.cart.orders.forEach(element => {
+      console.log("CartService: dish name:" + element.dish.name);
+    });
     return this.cart.orders;
   }
-  public addDish(dishId: number) {
-    console.log("dish added: " + dishId)
-    let dishIndex = this.cart.orders.findIndex(element => element.dishId == dishId);
+  public addDish(dish: MenuItem) {
+    console.log("dish added: " + dish.dishId)
+    let dishIndex = this.cart.orders.findIndex(element => element.dish.dishId == dish.dishId);
     if (dishIndex != -1) {
       this.cart.orders[dishIndex].servings++;
     } else {
       this.cart.orders.push(
         {
-          dishId: dishId,
+          dish: dish,
           servings: 1
         }
       );
@@ -64,20 +79,26 @@ export class CartService {
   public removeDish(dishId: number) {
     console.log("dish removed: " + dishId)
     if (dishId) {
-      let dishIndex = this.cart.orders.findIndex(element => element.dishId == dishId);
+      let dishIndex = this.cart.orders.findIndex(element => element.dish.dishId == dishId);
       if (dishIndex != -1) {
         this.cart.orders[dishIndex].servings > 1
           ? this.cart.orders[dishIndex].servings--
-          : this.cart.orders.splice(dishIndex, 1)
+          : this.cart.orders.splice(dishIndex, 1);
       }
     }
   }
+  public removeAllServings(dishId: number) {
+    let dishIndex = this.cart.orders.findIndex(element => element.dish.dishId == dishId);
+    if (dishIndex != -1) {
+      this.cart.orders.splice(dishIndex, 1);
+    }
+  }
   public getDishCount(dishId: number): number {
-    let dishIndex = this.cart.orders.findIndex(element => element.dishId == dishId);
+    let dishIndex = this.cart.orders.findIndex(element => element.dish.dishId == dishId);
     return dishIndex != -1 ? this.cart.orders[dishIndex].servings : 0;
   }
   public calcSumPrice(dishId: number, price: number): number {
-    let dishIndex = this.cart.orders.findIndex(element => element.dishId == dishId);
+    let dishIndex = this.cart.orders.findIndex(element => element.dish.dishId == dishId);
     return dishIndex != -1 ? this.cart.orders[dishIndex].servings * price : 0;
   }
   public getSessionId(): number {

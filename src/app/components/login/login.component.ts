@@ -12,6 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class LoginComponent implements OnInit {
 
   guest: Guest = { email: '', username: '', password: '' }
+  notFoundError: string
 
   constructor(private authService: AuthService,
     private router: Router, 
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl("search")
             }
           } else {
-            console.log("No user found.")
+            console.log("User not found.");
+            this.notFoundError = "User not found! Check your e-mail and password.";
           }
         })
   }

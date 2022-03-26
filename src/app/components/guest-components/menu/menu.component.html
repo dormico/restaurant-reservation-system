@@ -1,4 +1,5 @@
 <div class="row card-group mx-4" *ngIf="menu">
+    <h1 class="display-6">{{rName}}</h1>
     <div class="col-md-3 my-2" *ngFor="let dish of menu">
         <div class="card h-100">
             <img src="{{dish.image}}" class="card-img-top" alt="dish">
@@ -17,7 +18,7 @@
                     order.orders[getOrderIndex(dish.dishId)].servings : 0}}</H5>
                 <H5 class="m-0 text-muted" *ngIf="!order.orders[getOrderIndex(dish.dishId)]">0</H5> -->
                 <h5 class="m-0 text-muted">{{getDishCount(dish.dishId)}}</h5>
-                <div class="btn p-0" (click)="addDish(dish.dishId)">
+                <div class="btn p-0" (click)="addDish(dish)">
                     <img src="{{'../assets/icons/plus-square.svg'}}" width="36" alt="plus" />
                 </div>
             </div>

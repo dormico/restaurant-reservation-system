@@ -26,6 +26,14 @@ export interface MenuItem{
     image?: string
 }
 
+export interface MenuItemResponse{
+    dishId: string
+    name: string
+    description: string
+    price: number
+    image?: string
+}
+
 export interface Review{
     date: string
     rating: number

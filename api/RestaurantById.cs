@@ -9,11 +9,9 @@ using System.Net.Http;
 namespace Restaurant
 {
   public class RestaurantById
-  {
-    static readonly HttpClient client = new HttpClient();
-    
+  {    
     [FunctionName("GetRestaurantById")]
-    public static async Task<IActionResult> Run(
+    public static async Task<IActionResult> GetRestaurant(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", 
         Route = "RestaurantItems/{partitionKey}/{id}")] HttpRequest req,
         [CosmosDB(
@@ -35,6 +33,32 @@ namespace Restaurant
       {
         log.LogInformation($"Found RestaurantItem, Name: {restaurantItem.Name}");
         return new OkObjectResult(restaurantItem);
+      }
+    }
+
+    [FunctionName("GetMenuByRestaurantId")]
+    public static async Task<IActionResult> GetMenu(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", 
+        Route = "RestaurantItems/{partitionKey}/{id}/menu")] HttpRequest req,
+        [CosmosDB(
+            databaseName: "Restaurants",
+            collectionName: "RestaurantItems",
+            ConnectionStringSetting = "CosmosDBConnectionString",
+            Id = "{id}",
+            PartitionKey = "{partitionKey}")] RestaurantItem restaurantItem,
+        ILogger log)
+    {
+      log.LogInformation("C# HTTP trigger function processed a request.");
+
+      if (restaurantItem == null)
+      {
+        log.LogInformation($"Restaurant not found");
+        return new NotFoundResult();
+      }
+      else
+      {
+        log.LogInformation($"Found Menu of Restaurant: {restaurantItem.Menu}");
+        return new OkObjectResult(restaurantItem.Menu);
       }
     }
   }

@@ -4,6 +4,7 @@ import { CartComponent } from './components/guest-components/cart/cart.component
 import { FeedbackFormComponent } from './components/guest-components/feedback-form/feedback-form.component';
 import { MenuComponent } from './components/guest-components/menu/menu.component';
 import { NewGuestComponent } from './components/guest-components/new-guest/new-guest.component';
+import { PaymentComponent } from './components/guest-components/payment/payment.component';
 import { RestaurantDetailsComponent } from './components/guest-components/restaurant-details/restaurant-details.component';
 import { RestaurantsListComponent } from './components/guest-components/restaurants-list/restaurants-list.component';
 import { LoginComponent } from './components/login/login.component';
@@ -30,6 +31,12 @@ const routes: Routes = [
   {
     path: 'user/:id/cart',
     component: CartComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/:id/payment',
+    component: PaymentComponent,
     data: { requiresLogin: true },
     canActivate: [AuthGuard]
   },

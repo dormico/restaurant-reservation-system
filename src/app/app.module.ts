@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { ErrorComponent } from './components/error/error.component';
+import { PaymentComponent } from './components/guest-components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ErrorComponent } from './components/error/error.component';
     FooterComponent,
     LoginComponent,
     NewPasswordComponent,
-    ErrorComponent
+    ErrorComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

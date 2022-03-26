@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Order } from 'src/app/models/order.type';
-import { MenuItem, Restaurant } from 'src/app/models/restaurant.type';
+import { MenuItem } from 'src/app/models/restaurant.type';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -14,7 +14,8 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit, OnDestroy {
-
+  
+  @Input() public rName: string
   public menu: MenuItem[]
   public order: Order
 
@@ -38,10 +39,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   private getMenu() {
     this.actRoute.params.subscribe(params => {
       this.rId = +params['id'];
-      let r: Restaurant;
-      this.restaurantService.getRestaurantById(this.rId)
-        .subscribe(rest => r = rest);
-      this.menu = r.menu;
+      this.restaurantService.getRestaurantMenu(this.rId)
+        .subscribe(m => this.menu = m);
     });
   }
   private getGuest() {
@@ -53,8 +52,8 @@ export class MenuComponent implements OnInit, OnDestroy {
         }
       });
   }
-  public addDish(dishId: number) {
-    this.cartService.addDish(dishId);
+  public addDish(dish: MenuItem) {
+    this.cartService.addDish(dish);
   }
   public removeDish(dishId: number) {
     this.cartService.removeDish(dishId);

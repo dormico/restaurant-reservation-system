@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { Guest } from '../models/guest.type';
 import { guests } from '../../app/mock/guests.json';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
+  
   private nullGuest: Guest = { username: "", email: "", password: "" }
   private guests: Guest[] = guests;
-  private activeGuest = new BehaviorSubject<Guest>(null/*{ username: "Asd", email: "asd@email.com", password: "asd" }*/);
+  private activeGuest = new BehaviorSubject<Guest>(this.nullGuest/*{ username: "Asd", email: "asd@email.com", password: "asd" }*/);
 
   public isAuthenticated(): boolean {
 
@@ -21,15 +23,16 @@ export class AuthService {
     //// Check whether the token is expired and return
     //// true or false
     //return !this.jwtHelper.isTokenExpired(token);
-
-    console.log("active guest: " + this.activeGuest.value.username)
-    return this.activeGuest ? true : false;
+    if (this.activeGuest.value !== this.nullGuest) {
+      console.log("active guest name: " + this.activeGuest.value.username);
+    }
+    return this.activeGuest.value === this.nullGuest ? false : true;
   }
   public getGuestName(g: Guest): Observable<Guest> {
     let guest = guests.find(element => element.email == g.email && element.password == g.password);
     return guest ? of(guest) : of(this.nullGuest);
   }
-  public addGuest(g: Guest){
+  public addGuest(g: Guest) {
     this.guests.push(g);
   }
   public getActiveGuest(): Observable<Guest> {
@@ -38,8 +41,9 @@ export class AuthService {
   public setActiveGuest(g: Guest) {
     this.activeGuest.next(g);
   }
-  public logout(): void{
-    this.activeGuest.next(null);
+  public logout(): void {
+    this.activeGuest.next(this.nullGuest);
+    this.router.navigateByUrl('/');
     console.log("User logged out!");
   }
 }
