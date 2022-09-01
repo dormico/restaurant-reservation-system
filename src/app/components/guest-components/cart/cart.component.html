@@ -1,5 +1,5 @@
 <h1 class="display-6 text-center my-4">Your cart</h1>
-<div class="list-group" *ngIf="orders">
+<div class="list-group mb-4" *ngIf="orders">
     <div *ngFor="let order of orders" class="list-group-item flex-column d-flex ">
         <div class="row align-items-center">
             <div class="col-3 text-center"><img src="{{order.dish.image}}" width=100 alt="dish"></div>
@@ -7,31 +7,32 @@
                 <h5 class="mb-1 display-8">{{order.dish.name}}</h5>
             </div>
             <div class="col-3 row align-items-center">
-                <!-- <div class="col text-end" (click)="goToMenu()">
-                    <img src="{{'../assets/icons/caret-left.svg'}}" alt="arrow" />
-                </div> -->
+                <div class="col text-end">
+                    <img class="svg-filter-light-gray" src="{{'../assets/icons/caret-left.svg'}}" alt="arrow"
+                        (click)="removeDish(order.dish.dishId)" />
+                </div>
                 <p class="mb-1 display-8 text-center col">{{order.servings}}</p>
-                <!-- <div class="col">
-                    <img src="{{'../assets/icons/caret-right.svg'}}" alt="arrow" />
-                </div> -->
+                <div class="col">
+                    <img class="svg-filter-light-gray" src="{{'../assets/icons/caret-right.svg'}}" alt="arrow"
+                        (click)="addDish(order.dish)" />
+                </div>
             </div>
             <div class="col-2 text-muted">
                 Total: {{order.dish.price | currency}}
             </div>
-            <div class="col-2" (click)="removeDish(order.dish.dishId)">
-                <img class="ms-1 mb-1" src="{{'../assets/icons/x-square.svg'}}" alt="delete" />
+            <div class="col-2" (click)="removeAllServings(order.dish.dishId)">
+                <img class="ms-1" src="{{'../assets/icons/x-square.svg'}}" alt="delete" />
             </div>
         </div>
     </div>
+    <div class="display-4 text-white">.</div>
 </div>
-<div>
-    <div class="btn btn-secondary align-items-center p-3 col-2 " style="position: fixed; bottom: 2rem; right: 40rem;"
-        (click)="goToMenu()">
-        ADD MORE
+<div class="fixed-bottom d-flex justify-content-around mb-4 mt-2">
+    <div class="btn btn-secondary p-3 col-2" (click)="goToMenu()">
         <img class="ms-1 mb-1" src="{{'../assets/icons/caret-left.svg'}}" width="24" alt="caret" />
+        ADD MORE
     </div>
-    <div class="btn btn-secondary align-items-center p-3 col-2" style="position: fixed; bottom: 2rem; right: 2rem;"
-        [routerLink]="['/payment']" (click)="goToPayment()">
+    <div class="btn btn-secondary align-items-center p-3 col-2" (click)="goToPayment()" (click)="goToPayment()">
         CHECK OUT
         <img class="ms-1 mb-1" src="{{'../assets/icons/caret-right.svg'}}" width="24" alt="caret" />
     </div>

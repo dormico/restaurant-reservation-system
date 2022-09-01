@@ -6,18 +6,14 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Net.Http;
-using Azure.Cosmos;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
-using System.Linq;
-using System.Net;
 using System.Collections.Generic;
 
 namespace Restaurant
 {
-  public static class RestaurantsList
+  public static class GetAllRestaurants
   {
     static readonly HttpClient client = new HttpClient();
 

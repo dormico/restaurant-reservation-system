@@ -14,7 +14,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit, OnDestroy {
-  
+
   @Input() public rName: string
   public menu: MenuItem[]
   public order: Order
@@ -68,5 +68,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     let sId: number;
     sId = this.cartService.getSessionId();
     this.router.navigateByUrl('/user/' + sId + '/cart');
+  }
+  public isCartDisabled(): boolean {
+    let vari = this.cartService.getOrders().length === 0 ? true : false;
+    console.log("Is disabled? " + vari);
+    return vari;
   }
 }

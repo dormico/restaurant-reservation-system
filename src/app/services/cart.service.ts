@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Order, OrderedDish } from '../models/order.type';
-import { MenuItem, MenuItemResponse } from '../models/restaurant.type';
+import { MenuItem } from '../models/restaurant.type';
 import { RestaurantService } from './restaurant.service';
 
 @Injectable({
@@ -10,8 +9,6 @@ import { RestaurantService } from './restaurant.service';
 export class CartService {
 
   private visitedRestaurantId: number = -1;
-
-  private menu: MenuItem[] = []
 
   private cart: Order = {
     id: -1,

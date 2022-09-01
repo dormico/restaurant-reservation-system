@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Feedback } from 'src/app/models/feedback.type';
 
 @Component({
   selector: 'app-feedback-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackFormComponent implements OnInit {
 
+  public feedback: Feedback;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onSubmit() {
+
   }
 
 }

@@ -8,8 +8,8 @@ import { RestaurantResults } from '../models/test.type';
   providedIn: 'root'
 })
 export class RestaurantService {
-  //private url: string = "https://restaurant-func-app-1.azurewebsites.net/api/"
-  private url: string = "http://localhost:7071/api/"
+  private url: string = "https://restaurant-func-app-1.azurewebsites.net/api/"
+  //private url: string = "http://localhost:7071/api/"
 
   constructor(private http: HttpClient) { }
 

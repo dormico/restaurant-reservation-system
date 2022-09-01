@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private actRoute: ActivatedRoute, 
+    private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  public goToFeedback() {
+    let uId;
+    this.actRoute.params.subscribe(params => {
+      uId = +params['id'];
+    });
+    this.router.navigateByUrl('/user/' + uId + '/feedback');
   }
 
 }

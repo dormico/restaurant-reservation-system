@@ -14,9 +14,6 @@
                 <div class="btn p-0" (click)="removeDish(dish.dishId)">
                     <img src="{{'../assets/icons/dash-square.svg'}}" width="36" alt="plus" />
                 </div>
-                <!-- <H5 class="m-0 text-muted" *ngIf="order.orders[getOrderIndex(dish.dishId)]">{{order.orders ?
-                    order.orders[getOrderIndex(dish.dishId)].servings : 0}}</H5>
-                <H5 class="m-0 text-muted" *ngIf="!order.orders[getOrderIndex(dish.dishId)]">0</H5> -->
                 <h5 class="m-0 text-muted">{{getDishCount(dish.dishId)}}</h5>
                 <div class="btn p-0" (click)="addDish(dish)">
                     <img src="{{'../assets/icons/plus-square.svg'}}" width="36" alt="plus" />
@@ -28,11 +25,11 @@
             <div class="card-footer">Total: {{calcSumPrice(dish.dishId, dish.price) | currency}}</div>
         </div>
     </div>
-    <div class="btn btn-secondary align-items-center p-3 col-2" style="position: fixed; bottom: 2rem; right: 2rem;"
-        [routerLink]="['/cart']" (click)="goToCart()">
+    <button class="btn btn-secondary align-items-center p-3 col-2" style="position: fixed; bottom: 2rem; right: 2rem;"
+        [routerLink]="['/cart']" (click)="goToCart()" [disabled]="isCartDisabled()">
         CHECK OUT
         <img class="ms-1 mb-1" src="{{'../assets/icons/cart2.svg'}}" width="24" alt="cart" />
-    </div>
+</button>
 </div>
 <div *ngIf="!menu">
     <h3 class="display-6">Loading...</h3>
