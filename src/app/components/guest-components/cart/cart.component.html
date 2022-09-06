@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="col-2 text-muted">
-                Total: {{order.dish.price | currency}}
+                Total: {{calcSumPrice(order.dish.dishId, order.dish.price) | currency}}
             </div>
             <div class="col-2" (click)="removeAllServings(order.dish.dishId)">
                 <img class="ms-1" src="{{'../assets/icons/x-square.svg'}}" alt="delete" />

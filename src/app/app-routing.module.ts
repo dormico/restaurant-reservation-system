@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/guest-components/cart/cart.component';
 import { FeedbackFormComponent } from './components/guest-components/feedback-form/feedback-form.component';
+import { FeedbackSubmittedComponent } from './components/guest-components/feedback-submitted/feedback-submitted.component';
 import { MenuComponent } from './components/guest-components/menu/menu.component';
 import { NewGuestComponent } from './components/guest-components/new-guest/new-guest.component';
 import { PaymentComponent } from './components/guest-components/payment/payment.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register/guest', component: NewGuestComponent },
   { path: 'register/restaurant', component: NewRestaurantComponent },
   { path: 'newpass', component: NewPasswordComponent },
+  { path: 'feedbackSubmitted', component: FeedbackSubmittedComponent },
   
   { path: 'search', component: RestaurantsListComponent },
   { path: 'restaurant/:id', component: RestaurantDetailsComponent },
@@ -42,9 +44,9 @@ const routes: Routes = [
   },
   {
     path: 'user/:id/feedback',
-    component: FeedbackFormComponent,
+    component: FeedbackFormComponent/*,
     data: { requiresLogin: true },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard]*/
   },
   { path: '', redirectTo: '/search', pathMatch: 'full' },
 

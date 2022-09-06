@@ -12,7 +12,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 export class RestaurantDetailsComponent implements OnInit {
 
   restaurant: Restaurant
-  id: number
+  id: string
 
   constructor(private actRoute: ActivatedRoute,
     private router: Router,
@@ -21,12 +21,12 @@ export class RestaurantDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.actRoute.params.subscribe(params => {
-      this.id = +params['id'];
+      this.id = params['id'];
       this.getRestaurantById(this.id)
     });
   }
 
-  public getRestaurantById(id: number) {
+  public getRestaurantById(id: string) {
     this.restaurantService.getRestaurantById(id)?.subscribe(
       rest => {
         if (rest) {
@@ -36,7 +36,7 @@ export class RestaurantDetailsComponent implements OnInit {
         }
       });
   }
-  public goToOrder(rId: number){
+  public goToOrder(rId: string){
     this.cartService.setVisitedId(rId);
     this.router.navigateByUrl('/restaurant/'+ rId + '/menu');
   }

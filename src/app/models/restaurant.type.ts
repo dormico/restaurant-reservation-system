@@ -1,5 +1,5 @@
 export interface Restaurant{
-    id: number
+    id: string
     name: string
     address: string
     phone: string
@@ -19,7 +19,7 @@ export interface Restaurant{
 }
 
 export interface MenuItem{
-    dishId: number
+    dishId: string
     name: string
     description: string
     price: number

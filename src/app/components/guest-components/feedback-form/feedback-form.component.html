@@ -1,74 +1,112 @@
 <div class="container">
-    <div class="display-6 my-4">Feedback form</div>
-    <div class="display-8 my-4">Give us feedback!</div>
-    <!-- <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
-        <div class="form-group">
-            <label for="rating" class="form-label">How was your overall impression of this restaurant?</label>
-            <div class="row">
-                <div class="col">Bad</div>
-                <input type="range" class="form-range col" min="0" max="5" step="1" id="rating" required
-                    [(ngModel)]="feedback.rating">
-                <div class="col">Satisfied</div>
+    <div class="my-5 p-3 text-center text-white bg-green rounded-3">
+        <div class="display-6">Feedback form</div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="display-8 mt-2 text-center text-italic text-white-50 col">Give us feedback!</div>
+        </div>
+    </div>
+    
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+        <div class="form-group my-4">
+            <div class="text-center bg-green rounded-3 text-white display-8 p-2">
+                <label for="rating" class="form-label">What was your overall impression of this
+                    restaurant?</label>
+            </div>
+            <div class="border border-2 rounded-3 p-3">
+                <div class="row">
+                    <div class="col-10"><input type="text" class="form-control col-8 text-italic" id="experience" placeholder="My experience was..." required
+                            (ngModel)="feedback.experience"></div>
+                    <div class="col-2 text-center">
+                        <a (click)="setStars(1)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>   
+                        <a (click)="setStars(2)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
+                        <a (click)="setStars(3)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
+                        <a (click)="setStars(4)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
+                        <a (click)="setStars(5)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="experience" class="form-label">How was your overall impression of this restaurant?</label>
-            <div class="row text-center">
-                <input type="text" class="form-control col-8" id="experience" required
-                    [(ngModel)]="feedback.experience">
+        <div class="form-group my-4">
+            <div class="text-center bg-green rounded-3 text-white display-8 p-2">
+                <label for="recommendation" class="form-label text-center">Would you recommend this restaurant to
+                    others?</label>
             </div>
+            <div class="border border-2 rounded-3 p-3">     
+                <div class="row">
+                    <div class="col text-end">No</div>
+                    <div class="col"><input type="range" class="form-range" min="1" max="5" step="1" value="3" id="recommendation"
+                        (ngModel)="feedback.recommend"></div>                    
+                    <div class="col">Absolutely</div>
+                </div>
+            </div>       
         </div>
-        <div class="form-group">
-            <label for="recommendation" class="form-label">Would you recommend this restaurant to others?</label>
-            <div class="row">
-                <div class="col">No</div>
-                <input type="range" class="form-range col" min="0" max="5" step="1" id="recommendation"
-                    [(ngModel)]="feedback.recommendation">
-                <div class="col">Yes</div>
+        <div class="form-group text-center my-4">
+            <div class="text-center bg-green rounded-3 text-white display-8 p-2">
+                <label for="recommendation" class="form-label">I was satisfied with the restaurant's...</label>
             </div>
+            <div class="border border-2 rounded-3 p-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">friendliness</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">cleanness</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox3">serving time</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                    <label class="form-check-label" for="inlineCheckbox4">portion size</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+                    <label class="form-check-label" for="inlineCheckbox5">food quality</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+                    <label class="form-check-label" for="inlineCheckbox6">prices</label>
+                </div>
+            </div>           
         </div>
-        <div class="form-group">
-            <label for="recommendation" class="form-label">Would you recommend this restaurant to others?</label>
-            div
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">1</label>
+        <div class="form-group text-center my-4">
+            <div class="text-center bg-green rounded-3 text-white display-8 p-2">
+                <label for="recommendation" class="form-label">The restaurant could improve it's...</label>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
-                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
-            </div>
+            <div class="border border-2 rounded-3 p-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">friendliness</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">cleanness</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox3">serving time</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                    <label class="form-check-label" for="inlineCheckbox4">portion size</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+                    <label class="form-check-label" for="inlineCheckbox5">food quality</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+                    <label class="form-check-label" for="inlineCheckbox6">prices</label>
+                </div>
+            </div>           
         </div>
-
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name"
-                #name="ngModel">
-            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                Name is required
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="alterEgo">Alter Ego</label>
-            <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
-        </div>
-
-        <div class="form-group">
-            <label for="power">Hero Power</label>
-            <select class="form-control" id="power" required [(ngModel)]="model.power" name="power" #power="ngModel">
-                <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-            </select>
-            <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
-                Power is required
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!feedbackForm.form.valid">Submit</button>
-    </form> -->
-
+        <div class="row mb-5">
+            <div class="col"></div>
+            <button type="submit" class="btn btn-primary col" [disabled]="!feedbackForm.form.valid">Submit</button>
+            <div class="col"></div>
+        </div>                
+    </form>
 </div>

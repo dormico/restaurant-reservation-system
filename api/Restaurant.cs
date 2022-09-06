@@ -11,9 +11,7 @@ namespace Restaurant
     public string? Address { get; set; }
     public string? Phone { get; set; }
     public string? Email { get; set; }
-
-    [JsonProperty("takeaway")]
-    public bool IsTakeawayAllowed { get; set; }
+    public bool Takeaway { get; set; }
     public int Pricing { get; set; }
     public string? CardNum { get; set; }
     public int Opening { get; set; }
@@ -28,8 +26,7 @@ namespace Restaurant
 
     public class MenuItem
     {
-      [JsonProperty("dishId")]
-      public string? id { get; set; }
+      public string? dishId { get; set; }
       public string? Name { get; set; }
       public string? Description { get; set; }
       public int Price { get; set; }

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
             console.log("Found user: " + g.username)
             this.authService.setActiveGuest(g);
             let rId = this.cartService.getVisitedId();
-            if (rId != -1) {
+            if (rId != "-1") {
               this.router.navigateByUrl("restaurant/" + rId + "/menu")
             } else {
               this.router.navigateByUrl("search")

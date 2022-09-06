@@ -1,7 +1,8 @@
 export interface Feedback{
+    restaurantId: number,
     rating: number,
     experience: string,
-    recommendation: number,
-    improvements: string[],
-    satisfactory: string[]
+    recommend: number,
+    negative: string[],
+    positive: string[]
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.type';
 
 @Component({
@@ -9,13 +10,17 @@ import { Feedback } from 'src/app/models/feedback.type';
 export class FeedbackFormComponent implements OnInit {
 
   public feedback: Feedback;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  public onSubmit() {
+  public setStars(n: number) {
+    console.log("You gave a " + n + " star rating!")
+  }
 
+  public onSubmit() {
+    this.router.navigateByUrl('/feedbackSubmitted');
   }
 
 }

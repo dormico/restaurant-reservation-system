@@ -26,19 +26,19 @@ export class CartComponent implements OnInit {
       console.log("dish name:" + element.dish.name);
     });
   }
-  public calcSumPrice(dishId: number, price: number): number {
+  public calcSumPrice(dishId: string, price: number): number {
     return this.cartService.calcSumPrice(dishId, price);
   }
   public addDish(dish: MenuItem) {
     this.cartService.addDish(dish);
   }
-  public removeDish(dishId: number) {
+  public removeDish(dishId: string) {
     this.cartService.removeDish(dishId);
     if(this.orders.length == 0){
       this.goToMenu();
     }
   }
-  public removeAllServings(dishId: number) {
+  public removeAllServings(dishId: string) {
     this.cartService.removeAllServings(dishId);
     if(this.orders.length == 0){
       this.goToMenu();

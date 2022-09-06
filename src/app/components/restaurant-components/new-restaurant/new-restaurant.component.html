@@ -1,7 +1,7 @@
 <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" class="row">
     <div class="row">
         <div class="col">
-            
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">REGISTER</button>
         </div>
         <div class="col">
             

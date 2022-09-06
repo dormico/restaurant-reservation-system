@@ -3,7 +3,7 @@ import { MenuItem } from "./restaurant.type";
 export interface Order{
     id: number,
     guestEmail: string
-    restaurantId: number,
+    restaurantId: string,
     orders: OrderedDish[]
 }
 export interface OrderedDish{

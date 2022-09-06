@@ -36,8 +36,6 @@ namespace Restaurant
       IDocumentQuery<RestaurantItem> query = client.CreateDocumentQuery<RestaurantItem>(collectionUri)
           .AsDocumentQuery();
 
-      //var ret = new { Restaurants = itemQuery.ToArray() };
-
       var rs = new List<RestaurantItem>();
 
       while (query.HasMoreResults)

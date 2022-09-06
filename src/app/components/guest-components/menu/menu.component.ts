@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   public menu: MenuItem[]
   public order: Order
 
-  private rId: number
+  private rId: string
   private unsubscribe: Subject<any> = new Subject<any>();
 
   constructor(private actRoute: ActivatedRoute,
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
   private getMenu() {
     this.actRoute.params.subscribe(params => {
-      this.rId = +params['id'];
+      this.rId = params['id'];
       this.restaurantService.getRestaurantMenu(this.rId)
         .subscribe(m => this.menu = m);
     });
@@ -55,13 +55,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   public addDish(dish: MenuItem) {
     this.cartService.addDish(dish);
   }
-  public removeDish(dishId: number) {
+  public removeDish(dishId: string) {
     this.cartService.removeDish(dishId);
   }
   public getDishCount(dishId): number {
     return this.cartService.getDishCount(dishId);
   }
-  public calcSumPrice(dishId: number, price: number): number {
+  public calcSumPrice(dishId: string, price: number): number {
     return this.cartService.calcSumPrice(dishId, price);
   }
   public goToCart() {

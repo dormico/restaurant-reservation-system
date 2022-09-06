@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PaymentComponent } from './components/guest-components/payment/payment.component';
+import { FeedbackSubmittedComponent } from './components/guest-components/feedback-submitted/feedback-submitted.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PaymentComponent } from './components/guest-components/payment/payment.
     LoginComponent,
     NewPasswordComponent,
     ErrorComponent,
-    PaymentComponent
+    PaymentComponent,
+    FeedbackSubmittedComponent
   ],
   imports: [
     BrowserModule,

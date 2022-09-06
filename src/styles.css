@@ -8026,6 +8026,11 @@ textarea.form-control-lg {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 75%)
 }
 
+.bg-green {
+  --bs-bg-opacity: 1;
+  background-color: #64a19d !important;
+}
+
 .bg-success {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
