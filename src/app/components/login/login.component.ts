@@ -3,6 +3,7 @@ import { Guest } from 'src/app/models/guest.type';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { RestaurantAdminService } from 'src/app/services/restaurant-admin.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,13 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class LoginComponent implements OnInit {
 
-  guest: Guest = { email: '', username: '', password: '' }
+  guest: Guest = { email: '', username: '', password: '', restaurant: '' }
   notFoundError: string
 
   constructor(private authService: AuthService,
     private router: Router, 
-    private cartService: CartService) { }
+    private cartService: CartService, 
+    private restaurantAdminService: RestaurantAdminService) { }
 
   ngOnInit(): void { }
 
@@ -27,12 +29,17 @@ export class LoginComponent implements OnInit {
           if (g.email !== "") {
             console.log("Found user: " + g.username)
             this.authService.setActiveGuest(g);
-            let rId = this.cartService.getVisitedId();
-            if (rId != "-1") {
-              this.router.navigateByUrl("restaurant/" + rId + "/menu")
+            if(g.restaurant != ''){
+              this.restaurantAdminService.setRestaurant(g);
+              this.router.navigateByUrl("restaurant/" + g.restaurant + "/dashboard")
             } else {
-              this.router.navigateByUrl("search")
-            }
+              let rId = this.cartService.getVisitedId();
+              if (rId != "-1") {
+                this.router.navigateByUrl("restaurant/" + rId + "/reservation")
+              } else {
+                this.router.navigateByUrl("search")
+              }
+            }            
           } else {
             console.log("User not found.");
             this.notFoundError = "User not found! Check your e-mail and password.";

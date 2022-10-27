@@ -1,6 +1,6 @@
 <div class="list-group" *ngIf="restaurantResults">
     <nav *ngFor="let restaurant of restaurantResults.restaurants" [routerLink]="['/restaurant', restaurant.id]"
-        (click)="onSelect(restaurant)" class="list-group-item list-group-item-action flex-column d-flex ">
+        class="list-group-item list-group-item-action flex-column d-flex ">
         <div class="row align-items-center">
             <div class="col-2 text-center"><img src="{{restaurant.image}}" width=100 alt="Restaurant"></div>
             <h5 class="mb-1 col-2 display-8">{{restaurant.name}}</h5>

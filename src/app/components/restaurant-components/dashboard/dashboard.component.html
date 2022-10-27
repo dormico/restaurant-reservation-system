@@ -1,1 +1,35 @@
-<p>dashboard works!</p>
+<div class="container-fluid my-4">
+    <div class="row">
+        <div class="col bg-secondary m-2 p-2 rounded">
+            <h1 class="display-8 btn btn-light">Modify data</h1>
+        </div>
+        <div class="col bg-secondary m-2 p-2 rounded">
+            <h1 class="display-8 btn btn-light">Update menu</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col bg-green m-2 p-2 rounded">
+            <h1 class="display-8 border-top border-bottom border-2 text-white text-center">
+                Orders {{today()}}
+            </h1>
+        </div>
+        <div class="col bg-green m-2 p-2 rounded">
+            <h1 class="display-8 border-top border-bottom border-2 text-white text-center">
+                New orders
+            </h1>
+            <div class="d-flex justify-content-end">
+                <div class="btn btn-white p-2" (click)="goToOrders()">
+                    <div class="small text-muted">
+                        See all
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="col bg-green m-2 p-2 rounded">
+            <h1 class="display-8 border-top border-bottom border-2 text-white text-center">
+                Reviews
+            </h1>
+            
+        </div>
+    </div>
+</div>

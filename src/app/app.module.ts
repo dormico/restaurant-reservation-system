@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
@@ -23,6 +24,12 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
 import { ErrorComponent } from './components/error/error.component';
 import { PaymentComponent } from './components/guest-components/payment/payment.component';
 import { FeedbackSubmittedComponent } from './components/guest-components/feedback-submitted/feedback-submitted.component';
+import { TableReservationComponent } from './components/guest-components/table-reservation/table-reservation.component';
+import { ReservationMapComponent } from './components/restaurant-components/reservation-map/reservation-map.component';
+import { EditDetailsComponent } from './components/restaurant-components/edit-details/edit-details.component';
+import { EditMenuComponent } from './components/restaurant-components/edit-menu/edit-menu.component';
+import { InvoiceComponent } from './components/email/invoice/invoice.component';
+import { OrderComponent } from './components/email/order/order.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +51,20 @@ import { FeedbackSubmittedComponent } from './components/guest-components/feedba
     NewPasswordComponent,
     ErrorComponent,
     PaymentComponent,
-    FeedbackSubmittedComponent
+    FeedbackSubmittedComponent,
+    TableReservationComponent,
+    ReservationMapComponent,
+    EditDetailsComponent,
+    EditMenuComponent,
+    InvoiceComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

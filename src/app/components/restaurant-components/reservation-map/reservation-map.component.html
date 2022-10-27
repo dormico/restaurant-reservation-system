@@ -1,0 +1,71 @@
+<form [formGroup]="mapForm" class="container-fluid mb-5">
+    <h1 class="display-4 border-bottom border-top border-2 text-center text-uppercase my-5">Map</h1>
+    <div class="text-center my-4">
+        <input class="text-center display-8 text-muted text-italic rounded border" type="text" placeholder="Map 1"
+            formControlName="mapName">
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="row text-center align-items-center text-white">
+                <div class="col-1"></div>
+                <div *ngFor="let it of iterator" class="col px-0 py-1 display-8 bg-green rounded m-2">
+                    {{it+1}}
+                </div>
+            </div>
+            <div *ngFor="let it of iterator">
+                <div class="row flex-nowrap align-items-center display-8" formArrayName="fields">
+                    <span class="text-end col-1">
+                        {{it+1}}
+                    </span>
+                    <div class="col bg-light p-0" *ngFor="let fieldRow of fields.value; let i=index">
+                        <img src="{{getFieldType(it, i)}}" alt="tile" (click)="switchField(it, i)"
+                            class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="text-center py-1 d-flex justify-content-end align-items-center">
+                <div class="text-muted text-italic small p-0 mx-2">
+                    Map size: {{mapSize}} x {{mapSize}}
+                </div>
+                <div>
+                    <img class="btn p-0 bg-white mx-1" src="{{'../assets/icons/dash-square.svg'}}" width="36"
+                        alt="minus" (click)="reduceMap()" />
+                    <img class="btn p-0 bg-white mx-1" src="{{'../assets/icons/plus-square.svg'}}" width="36" alt="plus"
+                        (click)="extendMap()" />
+                </div>
+            </div>
+            <div class=" my-2 py-1 display-8 text-center bg-green rounded text-white">Upload a photo to this map</div>
+            <div class="row py-2 pe-3">
+                <div class="col-1 text-center d-flex align-items-center mx-2">
+                    <img src="{{'../assets/icons/gallery.png'}}" width="24" alt="map" />
+                </div>
+                <input class="text-center display-8 rounded bg-white form-control col" type="file" id="img" name="img"
+                    accept="image/*" formControlName="mapImage">
+            </div>
+            <div class="mb-4">
+                <div class="display-8 bg-green rounded text-white text-center my-2 py-1">Number of seats at table</div>
+                <span class="text-italic text-muted small">[horizontal : <span
+                        class="bg-green text-white rounded">vertical</span>] coordinates</span>
+            </div>
+            <div *ngFor="let it of iterator">
+                <div class="align-items-center display-8">
+                    <div *ngFor="let fieldRow of fields.value; let i=index">
+                        <div *ngIf="getFieldType(it,i) == FieldTypes.table" class="row">
+                            <div class="col-2">[{{it+1}}:<span class="bg-green text-light rounded">{{i+1}}</span>]</div>
+                            <div class="col">
+                                <input type="number" min="1" max="21" placeholder="0" value="fieldRow[it][i]"
+                                    class="text-muted display-8 border rounded"> seat(s)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end m-4">
+        <div class="btn btn-outline mx-2" (click)="goToDashboard()">Later</div>
+        <div class="btn btn-primary mx-2" (click)="saveAndGoToDashboard()">Save</div>
+    </div>
+</form>

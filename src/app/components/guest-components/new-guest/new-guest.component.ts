@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NewGuestComponent implements OnInit {
 
-  guest: Guest = { email: '', username: '', password: '' }
+  guest: Guest = { email: '', username: '', password: '', restaurant: '' }
   pw1: string
   pw2: string
 

@@ -1,0 +1,133 @@
+<form [formGroup]="regForm" class="container-fluid display-8 row">
+    <h1 class="display-4 text-center text-uppercase border-bottom border-top border-2 my-4">Details</h1>
+    <div class="row me-0">
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/name.png'}}" width="24" alt="name" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="My Restaurant" formControlName="name">
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/at.svg'}}" width="24" alt="email" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="myrestaurant@email.com" formControlName="email">
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2" (click)="hidden = !hidden">
+                <img src="{{'../assets/icons/hidden.png'}}" width="24" alt="password" />
+            </div>
+            <input *ngIf="hidden" class="text-center display-8 text-muted text-italic rounded border col"
+                type="password" formControlName="password">
+            <input *ngIf="!hidden" class="text-center display-8 text-muted text-italic rounded border col"
+                type="text" formControlName="password">
+        </div>
+    </div>
+    <div class="row me-0">
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/telephone-fill.svg'}}" width="24" alt="phone" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="+12 3 456 789" formControlName="phone">
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/geo-alt-fill.svg'}}" width="24" alt="address" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="0123 City Street 33" formControlName="address">
+        </div>
+    </div>
+    <div class="row me-0">
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/dish.png'}}" width="24" alt="food" />
+            </div>
+            <div class="col p-0">
+                <input class="form-control" list="datalistOptions" placeholder="" formControlName="style">
+                <datalist id="datalistOptions">
+                    <option *ngFor="let style of styles" [value]="style">{{style}}</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/internet.png'}}" width="24" alt="www" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                formControlName="website">
+        </div>
+    </div>
+    <div class="row me-0">
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/gallery.png'}}" width="24" alt="food" />
+            </div>
+            <input class="text-center display-8 rounded bg-white form-control col" type="file" id="img" name="img"
+                accept="image/*" formControlName="image">
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/credit-card.png'}}" width="24" alt="card" />
+            </div>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                formControlName="cardnum">
+        </div>
+    </div>
+    <div class="input-group me-0 my-1" formGroupName="time">
+        <div class=" mx-2">
+            <img src="{{'../assets/icons/clock-history.svg'}}" width="24" alt="open" />
+        </div>
+        <input type="number" aria-label="Hour" class="form-control rounded-start ms-4" min="8" max="23" placeholder="08"
+            formControlName="openingH">
+        <span class="input-group-text">:</span>
+        <input type="number" aria-label="Mins" class="form-control" min="0" max="59" step="10" placeholder="00"
+            formControlName="openingM">
+        <span class="input-group-text">-</span>
+        <input type="number" aria-label="Hour" class="form-control" min="8" max="23" placeholder="16"
+            formControlName="closingH">
+        <span class="input-group-text">:</span>
+        <input type="number" aria-label="Mins" class="form-control" min="0" max="59" step="10" placeholder="00"
+            formControlName="closingM">
+    </div>
+    <div class="row">
+        <div class="input-group col pe-0">
+            <div class="my-2 d-flex justify-content-start col">
+                <div class="col-1 mx-2">
+                    <img src="{{'../assets/icons/piggy-bank.png'}}" width="24" alt="card" />
+                </div>
+                <div class="col row  mx-2">
+                    <div class="col-1 p-0 text-end">
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    </div>
+                    <span class="col ps-0">
+                        <input class="form-control form-control-sm form-range mx-2 border-0" type="range" min="1"
+                            max="5" step="1" formControlName="pricing">
+                    </span>
+                    <div class="col-3 p-0">
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                        <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-2 col row">
+            <div class="col-1 mx-2">
+                <img src="{{'../assets/icons/takeaway.png'}}" width="24" alt="food" />
+            </div>
+            <div class="col">Allow takeaway orders?</div>
+            <div class="col">
+                <input class="form-check-input" type="checkbox" formControlName="takeaway">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <div class="btn btn-primary" (click)="goToAddMenu()">Next</div>
+    </div>
+</form>

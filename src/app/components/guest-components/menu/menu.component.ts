@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   public menu: MenuItem[]
   public order: Order
 
+  private placeholderImage: string = '../assets/img/menu/tuscan-grilled.jpg';
   private rId: string
   private unsubscribe: Subject<any> = new Subject<any>();
 
@@ -40,7 +41,12 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.actRoute.params.subscribe(params => {
       this.rId = params['id'];
       this.restaurantService.getRestaurantMenu(this.rId)
-        .subscribe(m => this.menu = m);
+        .subscribe(m => {
+          this.menu = m;
+          this.menu.forEach(item => {
+            if(item.image == '' || !item.image) item.image = this.placeholderImage;
+          });
+        });
     });
   }
   private getGuest() {
@@ -70,8 +76,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/user/' + sId + '/cart');
   }
   public isCartDisabled(): boolean {
-    let vari = this.cartService.getOrders().length === 0 ? true : false;
-    console.log("Is disabled? " + vari);
-    return vari;
+    let ordLen = this.cartService.getOrders().length === 0 ? true : false;
+    return ordLen;
   }
 }

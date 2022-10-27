@@ -11,8 +11,8 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 })
 export class RestaurantsListComponent implements OnInit {
 
-  restaurantResults: RestaurantResults;
-  mockRestaurants: Restaurant[];
+  public restaurantResults: RestaurantResults;
+  private placeholderImage: string = '../assets/img/gallery/gallery-5.jpg';
 
   constructor(private restaurantService: RestaurantService,
     private cartService: CartService) { }
@@ -21,17 +21,17 @@ export class RestaurantsListComponent implements OnInit {
     this.getRestaurantsList();
     this.cartService.removeVisitedId();
   }
-  // public getMockRestaurantsList() {
-  //   this.restaurantService.getRestaurants();
-  // }
   public getRestaurantsList() {
     this.restaurantService.getRestaurants()
-      .subscribe(re => this.restaurantResults = re);
+      .subscribe(
+        re => {
+          this.restaurantResults = re;
+          this.restaurantResults.restaurants.forEach(r => {
+            if(r.image == '' || !r.image) r.image = this.placeholderImage;
+          });
+        }
+      );
   }
-  // public getRestaurantByName(name: string) {
-  //   this.restaurantService.getRestaurantByName(name)
-  //     .subscribe(re => this.restaurants = re);
-  // }
   public times(n: number): Array<number> {
     return Array(n);
   }

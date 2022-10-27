@@ -13,6 +13,7 @@ export class RestaurantDetailsComponent implements OnInit {
 
   restaurant: Restaurant
   id: string
+  placeholderImage: string = '../assets/img/gallery/gallery-5.jpg'
 
   constructor(private actRoute: ActivatedRoute,
     private router: Router,
@@ -31,6 +32,7 @@ export class RestaurantDetailsComponent implements OnInit {
       rest => {
         if (rest) {
           this.restaurant = rest;
+          if(this.restaurant.image == '' || !this.restaurant.image) this.restaurant.image = this.placeholderImage; 
         } else {
           this.restaurant = null
         }
@@ -38,7 +40,7 @@ export class RestaurantDetailsComponent implements OnInit {
   }
   public goToOrder(rId: string){
     this.cartService.setVisitedId(rId);
-    this.router.navigateByUrl('/restaurant/'+ rId + '/menu');
+    this.router.navigateByUrl('/restaurant/'+ rId + '/reservation');
   }
   public times(n: number) :  Array<number>{
     return Array(n);

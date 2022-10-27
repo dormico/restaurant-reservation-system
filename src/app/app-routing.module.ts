@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InvoiceComponent } from './components/email/invoice/invoice.component';
 import { CartComponent } from './components/guest-components/cart/cart.component';
 import { FeedbackFormComponent } from './components/guest-components/feedback-form/feedback-form.component';
 import { FeedbackSubmittedComponent } from './components/guest-components/feedback-submitted/feedback-submitted.component';
@@ -8,25 +9,76 @@ import { NewGuestComponent } from './components/guest-components/new-guest/new-g
 import { PaymentComponent } from './components/guest-components/payment/payment.component';
 import { RestaurantDetailsComponent } from './components/guest-components/restaurant-details/restaurant-details.component';
 import { RestaurantsListComponent } from './components/guest-components/restaurants-list/restaurants-list.component';
+import { TableReservationComponent } from './components/guest-components/table-reservation/table-reservation.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { NewRestaurantComponent } from './components/restaurant-components/new-restaurant/new-restaurant.component';
+import { DailyOrdersComponent } from './components/restaurant-components/daily-orders/daily-orders.component';
+import { DashboardComponent } from './components/restaurant-components/dashboard/dashboard.component';
+import { EditDetailsComponent } from './components/restaurant-components/edit-details/edit-details.component';
+import { EditMenuComponent } from './components/restaurant-components/edit-menu/edit-menu.component';
+import { IncomingOrdersComponent } from './components/restaurant-components/incoming-orders/incoming-orders.component';
+import { ReservationMapComponent } from './components/restaurant-components/reservation-map/reservation-map.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register/guest', component: NewGuestComponent },
-  { path: 'register/restaurant', component: NewRestaurantComponent },
+  { path: 'register/restaurant/details', component: EditDetailsComponent },
+  { path: 'register/restaurant/menu', component: EditMenuComponent },
+  { path: 'register/restaurant/map', component: ReservationMapComponent },
   { path: 'newpass', component: NewPasswordComponent },
   { path: 'feedbackSubmitted', component: FeedbackSubmittedComponent },
-  
+
   { path: 'search', component: RestaurantsListComponent },
   { path: 'restaurant/:id', component: RestaurantDetailsComponent },
-  
+
+  { path: 'email/invoice', component: InvoiceComponent },
+  {
+    path: 'restaurant/:id/reservation',
+    component: TableReservationComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
   {
     path: 'restaurant/:id/menu',
     component: MenuComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/dashboard',
+    component: DashboardComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/orders',
+    component: IncomingOrdersComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/daily',
+    component: DailyOrdersComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/details',
+    component: EditDetailsComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/menu',
+    component: EditMenuComponent,
+    data: { requiresLogin: true },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant/:id/map',
+    component: ReservationMapComponent,
     data: { requiresLogin: true },
     canActivate: [AuthGuard]
   },

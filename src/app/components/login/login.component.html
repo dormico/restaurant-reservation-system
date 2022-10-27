@@ -1,38 +1,40 @@
-<form novalidate autocomplete="off" #form="ngForm" (ngSubmit)="onSubmit()" class="row">
-    <div class="col-4"></div>
-    <div class="col-4 text-center mt-4">
-        <div class="display-6 my-4">Sign in to Allegro</div>
-        <div class="form-group mt-4">
-            <label class="display-8">E-mail</label>
-            <input type=email class="form-control form-control-md" #email="ngModel" placeholder="Email" name="email"
-                [(ngModel)]="guest.email" email required>
-        </div>
-        <div *ngIf="email.invalid && (email.dirty || email.touched)">
-            <app-error [errors]="email.errors"></app-error>
-        </div>
-        <div class="form-group my-2">
-            <label class="display-8">Password</label>
-            <input type="password" class="form-control form-control-md" #password="ngModel" placeholder="Password"
-                name="password" [(ngModel)]="guest.password" required>
-            <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                <app-error [errors]="password.errors"></app-error>
+<form novalidate autocomplete="off" #form="ngForm" (ngSubmit)="onSubmit()" class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 text-center mt-4">
+            <div class="display-6 my-4">Sign in to Allegro</div>
+            <div class="form-group mt-4">
+                <label class="display-8">E-mail</label>
+                <input type=email class="form-control form-control-md" #email="ngModel" placeholder="Email" name="email"
+                    [(ngModel)]="guest.email" email required>
             </div>
-            <div class="text-end fst-italic"><a [routerLink]="['/newpass']"
-                    class="text-muted text-decoration-none">Forgot password?</a>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                <app-error [errors]="email.errors"></app-error>
+            </div>
+            <div class="form-group my-2">
+                <label class="display-8">Password</label>
+                <input type="password" class="form-control form-control-md" #password="ngModel" placeholder="Password"
+                    name="password" [(ngModel)]="guest.password" required>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <app-error [errors]="password.errors"></app-error>
+                </div>
+                <div class="text-end fst-italic"><a [routerLink]="['/newpass']"
+                        class="text-muted text-decoration-none">Forgot password?</a>
+                </div>
+            </div>
+            <div class="text-danger">
+                {{notFoundError}}
+            </div>
+            <div class="form-group container px-2 mt-4">
+                <div class="row">
+                    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">SIGN IN</button>
+                </div>
+            </div>
+            <div class="text-start mt-3 row">
+                <a class="col-sm" [routerLink]="['/register/guest']">New guest</a>
+                <a class="col-sm text-end" [routerLink]="['/register/restaurant/details']">New restaurant</a>
             </div>
         </div>
-        <div class="text-danger">
-            {{notFoundError}}
-        </div>
-        <div class="form-group container px-2 mt-4">
-            <div class="row">
-                <button class="btn btn-primary" [disabled]="form.invalid" type="submit">SIGN IN</button>
-            </div>
-        </div>
-        <div class="text-start mt-3 row">
-            <a class="col-sm" [routerLink]="['/register/guest']">New guest</a>
-            <a class="col-sm text-end" [routerLink]="['/register/restaurant']">New restaurant</a>
-        </div>
+        <div class="col-4"></div>
     </div>
-    <div class="col-4"></div>
 </form>

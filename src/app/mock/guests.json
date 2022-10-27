@@ -1,19 +1,28 @@
 {
     "guests": [
         {
+            "restaurant": "", 
             "username": "Asd",
             "password": "asd",
-            "email": "asd@email.com"
+            "email": "orsolyadk@gmail.com"
         },
         {
+            "restaurant": "", 
             "username": "Józsi",
             "password": "joska",
             "email": "joska@email.com"
         },
         {
+            "restaurant": "", 
             "username": "Pista",
             "password": "pista",
             "email": "pista@email.com"
+        },
+        {
+            "restaurant": "0", 
+            "username": "Whatever Restaurant",
+            "password": "myrestaurant",
+            "email": "myrestaurant@email.com"
         }
     ]
 }

@@ -38,9 +38,11 @@ namespace Restaurant
       newRestaurant.partitionKey = RId;
 
       // Add a JSON document to the output container.
+      var dataWithId = JsonConvert.SerializeObject(newRestaurant);
+      Console.WriteLine("Sending JSON data to Cosmos: " + dataWithId);
       await documentsOut.AddAsync(newRestaurant);
 
-      string responseMessage = RId;
+      var responseMessage = JsonConvert.SerializeObject(RId);
 
       return new OkObjectResult(responseMessage);
     }

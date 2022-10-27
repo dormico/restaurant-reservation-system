@@ -1,121 +1,137 @@
-<div *ngIf="restaurant" class="row">
-    <div class="card col-6">
-        <div class="card-header text-center display-6">{{restaurant.name | uppercase}}</div>
-        <img src="{{restaurant.image}}" alt="Restaurant">
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-secondary">
-                    <div class="mx-3">
-                        <div class="ratings">
-                            <div *ngFor="let rate of times(restaurant.rating)" class="p-0">
-                                <img src="{{'../assets/icons/star-fill.svg'}}" width=28 alt="" />
-                            </div>
-                            <div *ngFor="let rate of times(5-restaurant.rating)" class="p-0">
-                                <img src="{{'../assets/icons/star.svg'}}" width=28 alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item text-secondary">
-                    <div class="mx-3 row">
-                        <div class="col-1">
-                            <img src="{{'../assets/icons/telephone-fill.svg'}}" width="24" alt="phone" />
-                        </div>
-                        <div class="display-8 col">
-                            {{restaurant.phone}}
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item text-secondary">
-                    <div class="mx-3 row">
-                        <div class="col-1">
-                            <img src="{{'../assets/icons/at.svg'}}" width="24" alt="email" />
-                        </div>
-                        <div class="display-8 col">
-                            {{restaurant.email}}
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item text-secondary">
-                    <div class="mx-3 row">
-                        <div class="col-1">
-                            <img src="{{'../assets/icons/geo-alt-fill.svg'}}" width="24" alt="address" />
-                        </div>
-                        <div class="display-8 col">
-                            {{restaurant.address}}
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item text-secondary">
-                    <div class="mx-3 row">
-                        <div class="col-1">
-                            <img src="{{'../assets/icons/clock-history.svg'}}" width="24" alt="open" />
-                        </div>
-                        <div class="display-8 col">
-                            {{restaurant.opening}} - {{restaurant.closing}}
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="text-center display-8"> REVIEWS </div>
-            <ul class="list-group list-group-flush">
-                <li *ngFor="let rev of restaurant.reviews" class="list-group-item">
-                    <div class="d-flex justify-content-between my-2">
-                        <div class="text-muted">{{rev.date}}</div>
-                        <div class="col-2">
+<div *ngIf="restaurant" class="container-fluid">
+    <div class="row">
+        <div class="card col-6">
+            <div class="card-header text-center display-6">{{restaurant.name | uppercase}}</div>
+            <img src="{{restaurant.image}}" alt="Restaurant">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3">
                             <div class="ratings">
-                                <div *ngFor="let rate of times(rev.rating)" class="p-0">
-                                    <img src="{{'../assets/icons/star-fill.svg'}}" alt="" />
+                                <div *ngFor="let rate of times(restaurant.rating)" class="p-0">
+                                    <img src="{{'../assets/icons/star-fill.svg'}}" width=28 alt="" />
                                 </div>
-                                <div *ngFor="let rate of times(5-rev.rating)" class="p-0">
-                                    <img src="{{'../assets/icons/star.svg'}}" alt="" />
+                                <div *ngFor="let rate of times(5-restaurant.rating)" class="p-0">
+                                    <img src="{{'../assets/icons/star.svg'}}" width=28 alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3 row">
+                            <div class="col-1">
+                                <img src="{{'../assets/icons/telephone-fill.svg'}}" width="24" alt="phone" />
+                            </div>
+                            <div class="display-8 col">
+                                {{restaurant.phone}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3 row">
+                            <div class="col-1">
+                                <img src="{{'../assets/icons/at.svg'}}" width="24" alt="email" />
+                            </div>
+                            <div class="display-8 col">
+                                {{restaurant.email}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3 row">
+                            <div class="col-1">
+                                <img src="{{'../assets/icons/geo-alt-fill.svg'}}" width="24" alt="address" />
+                            </div>
+                            <div class="display-8 col">
+                                {{restaurant.address}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3 row">
+                            <div class="col-1">
+                                <img src="{{'../assets/icons/internet.png'}}" width="24" alt="web" />
+                            </div>
+                            <div class="display-8 col">
+                                {{restaurant.website}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                        <div class="mx-3 row">
+                            <div class="col-1">
+                                <img src="{{'../assets/icons/clock-history.svg'}}" width="24" alt="open" />
+                            </div>
+                            <div class="display-8 col">
+                                {{restaurant.openingH}}:{{restaurant.openingM}}<span
+                                    *ngIf="restaurant.openingM == 0">0</span> -
+                                {{restaurant.closingH}}:{{restaurant.closingM}}<span
+                                    *ngIf="restaurant.closingM == 0">0</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="text-center display-8"> REVIEWS </div>
+                <ul *ngIf="restaurant.reviews" class="list-group list-group-flush">
+                    <li *ngFor="let rev of restaurant.reviews" class="list-group-item">
+                        <div class="d-flex justify-content-between my-2">
+                            <div class="text-muted">{{rev.date}}</div>
+                            <div class="col-2">
+                                <div class="ratings">
+                                    <div *ngFor="let rate of times(rev.rating)" class="p-0">
+                                        <img src="{{'../assets/icons/star-fill.svg'}}" alt="" />
+                                    </div>
+                                    <div *ngFor="let rate of times(5-rev.rating)" class="p-0">
+                                        <img src="{{'../assets/icons/star.svg'}}" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content-start col-8">{{rev.text}}</div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="d-flex justify-content-end col-8 text-muted">{{rev.answer}}</div>
+                        </div>
+                    </li>
+                </ul>
+                <div *ngIf="!restaurant.reviews" class="m-2 border-top border-bottom text-muted"> No reviews yet </div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col">
+                        <span class="mx-1"> Pricing </span>
+                        <div class="ratings">
+                            <div *ngFor="let price of times(restaurant.pricing)" class="p-0">
+                                <div>
+                                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="24" alt="$" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-start col-8">{{rev.text}}</div>
-                        <div class="col-4"></div>
+                    <div class="col">
+                        <span> Style</span>
+                        <h3>{{restaurant.style}}</h3>
                     </div>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="d-flex justify-content-end col-8 text-muted">{{rev.answer}}</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="card-footer text-muted">
-            <div class="row">
-                <div class="col">
-                    <span class="mx-1"> Pricing </span>
-                    <div class="ratings">
-                        <div *ngFor="let price of times(restaurant.pricing)" class="p-0">
-                            <div>
-                                <img src="{{'../assets/icons/currency-dollar.svg'}}" width="24" alt="$" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <span> Style</span>
-                    <h3>{{restaurant.style}}</h3>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card col-6">
-        <div class="display-6 text-center card-header">MENU</div>
-        <nav *ngFor="let food of restaurant.menu" class="list-group-item list-group-item-action flex-column d-flex ">
-            <div class="row align-items-center">
-                <h5 class="mb-1 col display-8">{{food.name}}</h5>
-                <small class="col-2 text-muted">{{food.price | currency }}</small>
-            </div>
-        </nav>
-        <div class="btn btn-secondary" style="position: fixed; bottom: 2rem; right: 2rem;"
-            (click)="goToOrder(restaurant.id)"
-            >ORDER HERE</div>
+        <div class="card col-6">
+            <div class="display-6 text-center card-header">MENU</div>
+            <nav *ngFor="let food of restaurant.menu"
+                class="list-group-item list-group-item-action flex-column d-flex ">
+                <div class="row align-items-center">
+                    <h5 class="mb-1 col display-8">{{food.name}}</h5>
+                    <small class="col-2 text-muted">{{food.price | currency }}</small>
+                </div>
+            </nav>
+            <div class="btn btn-secondary" style="position: fixed; bottom: 2rem; right: 2rem;"
+                (click)="goToOrder(restaurant.id)">ORDER HERE</div>
+        </div>
     </div>
 </div>
 

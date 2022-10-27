@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private router: Router) { }
   
-  private nullGuest: Guest = { username: "", email: "", password: "" }
+  private nullGuest: Guest = { restaurant: "", username: "", email: "", password: "" }
   private guests: Guest[] = guests;
   private activeGuest = new BehaviorSubject<Guest>(this.nullGuest/*{ username: "Asd", email: "asd@email.com", password: "asd" }*/);
 
@@ -34,8 +34,10 @@ export class AuthService {
   }
   public addGuest(g: Guest) {
     this.guests.push(g);
+    console.log("AuthService: New user added: " + JSON.stringify(g));
   }
   public getActiveGuest(): Observable<Guest> {
+    console.log("active guest mail: " + this.activeGuest.value.email);
     return this.activeGuest;
   }
   public setActiveGuest(g: Guest) {

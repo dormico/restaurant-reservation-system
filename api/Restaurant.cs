@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Restaurant
 {
 #nullable enable
@@ -12,10 +10,13 @@ namespace Restaurant
     public string? Phone { get; set; }
     public string? Email { get; set; }
     public bool Takeaway { get; set; }
+    public Map? Tables { get; set; }
     public int Pricing { get; set; }
     public string? CardNum { get; set; }
-    public int Opening { get; set; }
-    public int Closing { get; set; }
+    public int OpeningH { get; set; }
+    public int OpeningM { get; set; }
+    public int ClosingH { get; set; }
+    public int ClosingM { get; set; }
     public MenuItem[]? Menu { get; set; }
 
     public string? Image { get; set; }
@@ -40,5 +41,20 @@ namespace Restaurant
       public string? Text { get; set; }
       public string? Answer { get; set; }
     }
+
+    public class Map
+    {
+      public string? Name { get; set; }
+      public int Size { get; set; }
+      public string? Image { get; set; }
+      public Field[][]? Fields { get; set; }
+    }
+  }
+
+  public class Field
+  {
+    public string? Type { get; set; }
+    public int Data { get; set; }
+    public (int, int)[]? Reserved { get; set; }
   }
 }

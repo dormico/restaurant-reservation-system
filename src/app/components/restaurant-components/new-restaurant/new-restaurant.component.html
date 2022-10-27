@@ -1,10 +1,14 @@
-<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" class="row">
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" class="container-fluid">
     <div class="row">
-        <div class="col">
-            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">REGISTER</button>
-        </div>
-        <div class="col">
-            
-        </div>
+        <app-edit-details></app-edit-details>
+    </div>
+    <div class="row">
+        <app-edit-menu></app-edit-menu>
+    </div>
+    <div class="bg-light row">
+        <app-reservation-map></app-reservation-map>
+    </div>
+    <div class="text-center mt-4 mb-5 p-1">
+        <button class="btn btn-secondary" type="submit" [disabled]="form.invalid">Register restaurant</button>
     </div>
 </form>

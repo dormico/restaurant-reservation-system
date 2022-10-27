@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  public guest: Guest = { email: "", username: "", password: "" };
+  public guest: Guest = { email: "", username: "", password: "", restaurant: '' };
 
   private unsubscribe: Subject<any> = new Subject<any>();
 

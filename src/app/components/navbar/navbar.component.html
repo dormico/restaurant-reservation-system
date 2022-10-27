@@ -3,11 +3,9 @@
         <a class="nav-link display-6 text-light" [routerLink]="'/search'">Allegro</a>
         <a *ngIf="!validGuest()" class="nav-item nav-link display-6 col text-end text-light"
             [routerLink]="'/login'">Login</a>
-        <div *ngIf="validGuest()" class="row align-items-center text-end">
-            <div class="col">
-                <a class="nav-item nav-link display-6 col text-end text-light">{{guest.username}}</a>
-            </div>
-            <div class="col p-0">
+        <div *ngIf="validGuest()" class="align-items-center text-end">
+            <div class="d-flex justify-content-center">
+                <a class="nav-item nav-link display-6 text-end text-light">{{guest.username}}</a>
                 <img (click)="logout()" src="{{'../assets/icons/person.svg'}}" width="36" alt="" />
             </div>
         </div>
