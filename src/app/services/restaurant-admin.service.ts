@@ -22,6 +22,15 @@ export class RestaurantAdminService {
     private http: HttpClient,
     private config: ConfigService) {
     this.url = restaurantService.Url;
+    this.initRestaurant();
+  }
+  public get Id() {
+    return this.myRestaurant.id;
+  }
+  public get activeRestaurant() {
+    return this.myRestaurant;
+  }
+  public initRestaurant(){
     this.myRestaurant = {
       id: "",
       name: "",
@@ -43,12 +52,6 @@ export class RestaurantAdminService {
       image: ""
     };
   }
-  public get Id() {
-    return this.myRestaurant.id;
-  }
-  public get activeRestaurant() {
-    return this.myRestaurant;
-  }
   public initUser(user: Guest): void {
     this.user = user;
   }
@@ -68,7 +71,7 @@ export class RestaurantAdminService {
     console.log("Id: " + this.myRestaurant.id + "Restaurant name: " + this.myRestaurant.name);
   }
   public addRestaurant(restaurant: Restaurant): void {
-    let activeUrl = this.url + "addRestaurant";
+    let activeUrl = this.url + "AddRestaurantOrchestration_HttpStart" /*"addRestaurant"*/ ;
     console.log("Calling " + activeUrl);
     let rJson = JSON.stringify(restaurant);
     console.log("Sending the json: " + rJson);
@@ -77,12 +80,13 @@ export class RestaurantAdminService {
         catchError(this.config.handleError)
       )
       .subscribe(r => {
-        this.myRestaurant.id = r;
-        if (this.myRestaurant.id != "") {
-          console.log("User registration");
-          this.setUserRestaurant(r);
-          this.registerUser();
-        }
+        console.log("Got server response: " + r);
+        // this.myRestaurant.id = r;
+        // if (this.myRestaurant.id != "") {
+        //   console.log("User registration");
+        //   this.setUserRestaurant(r);
+        //   this.registerUser();
+        // }
       });
     console.log("New restaurant successfully added with ID" + this.myRestaurant.id);
   }

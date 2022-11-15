@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Order, OrderedDish } from '../models/order.type';
 import { Map, MenuItem, Restaurant } from '../models/restaurant.type';
+import { OrderService } from './order.service';
 import { RestaurantService } from './restaurant.service';
 
 @Injectable({
@@ -29,7 +30,8 @@ export class CartService {
     menu: []
   };
   
-  constructor(private restaurantService: RestaurantService) {
+  constructor(private restaurantService: RestaurantService, 
+    private orderService: OrderService) {
     this.restaurantSubject.subscribe(r => this.currentRestaurant = r);
     this.initCart();
   }
@@ -88,14 +90,6 @@ export class CartService {
     this.cart.restaurantId = id;
   }
   public getReservationData(): Order {
-    // return {
-    //   takeaway: this.cart.takeaway,
-    //   date: this.cart.date,
-    //   hour: this.cart.hour,
-    //   min: this.cart.min,
-    //   duration: this.cart.duration,
-    //   tables: this.cart.tables
-    // }
     return this.cart;
   }
   public getOrders(): OrderedDish[] {
@@ -174,5 +168,8 @@ export class CartService {
     //   this.sessionId = Math.trunc((Math.random() * 100000) + 1000);
     //   return this.sessionId;
     // }
+  }
+  public saveOrder(){
+    this.orderService.addOrder(this.cart);
   }
 }

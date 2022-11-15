@@ -32,7 +32,7 @@
             </div>
             <div class="text-start mt-3 row">
                 <a class="col-sm" [routerLink]="['/register/guest']">New guest</a>
-                <a class="col-sm text-end" [routerLink]="['/register/restaurant/details']">New restaurant</a>
+                <a class="col-sm text-end" [routerLink]="['/register/restaurant/details']" (click)="initRestaurant()">New restaurant</a>
             </div>
         </div>
         <div class="col-4"></div>

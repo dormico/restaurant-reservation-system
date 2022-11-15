@@ -19,7 +19,7 @@ export class ReservationMapComponent implements OnInit {
 
   public mapSize: number = 9;
   public iterator: number[];
-  public FieldTypes = FieldTypes; 
+  public FieldTypes = FieldTypes;
 
   mapForm = this.fb.group({
     mapName: ['', Validators.required],
@@ -52,7 +52,7 @@ export class ReservationMapComponent implements OnInit {
         } else {
           group = {
             type: this.fb.control(FieldTypes.tile),
-            data: this.fb.control(0)
+            data: this.fb.control(2)
           }
         }
         row.push(
@@ -67,7 +67,7 @@ export class ReservationMapComponent implements OnInit {
   private initMap() {
     if (this.ras.myRestaurant.tables.fields.length != 0) {
       this.mapSize = this.ras.myRestaurant.tables.size;
-      this.mapForm.patchValue({ 
+      this.mapForm.patchValue({
         mapName: this.ras.myRestaurant.tables.name
       });
     }
@@ -106,7 +106,10 @@ export class ReservationMapComponent implements OnInit {
     this.getRow(row).at(i).get('type').setValue(value);
   }
   private setFieldData(row: number, i: number, value: string) {
-    this.getRow(row).at(i).get('data').setValue(value);
+    let newValue = this.getFieldData(row, i) + value;
+    if(+newValue > 0) {
+      this.getRow(row).at(i).get('data').setValue(newValue);
+    }
   }
   public extendMap() {
     if (this.mapSize <= 15) {

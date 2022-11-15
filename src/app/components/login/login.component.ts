@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  public initRestaurant(){
+    this.restaurantAdminService.initRestaurant();
+  }
+
   onSubmit() {
     this.authService.getGuestName(this.guest)
       .subscribe(

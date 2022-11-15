@@ -58,6 +58,7 @@ export class CartComponent implements OnInit {
   public goToPayment() {
     this.emailService.sendOrderDetails();
     this.emailService.sendInvoice();
+    this.cartService.saveOrder();
     let uId;
     this.actRoute.params.subscribe(params => {
       uId = +params['id'];

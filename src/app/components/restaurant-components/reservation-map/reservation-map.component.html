@@ -54,9 +54,19 @@
                     <div *ngFor="let fieldRow of fields.value; let i=index">
                         <div *ngIf="getFieldType(it,i) == FieldTypes.table" class="row">
                             <div class="col-2">[{{it+1}}:<span class="bg-green text-light rounded">{{i+1}}</span>]</div>
-                            <div class="col">
-                                <input type="number" min="1" max="21" placeholder="0" value="fieldRow[it][i]"
-                                    class="text-muted display-8 border rounded"> seat(s)
+                            <div class="col mx-2">
+                                <div class="row">
+                                    <div class="col-1 d-flex align-items-center">
+                                        <img class="svg-filter-light-gray" src="{{'../assets/icons/caret-left.svg'}}"
+                                            alt="arrow" (click)="setFieldData(it, i, -1)" />
+                                    </div>
+                                    <p class="mb-0 display-8 text-center col-1">{{getFieldData(it, i)}}</p>
+                                    <div class="col-1 d-flex align-items-center">
+                                        <img class="svg-filter-light-gray" src="{{'../assets/icons/caret-right.svg'}}"
+                                            alt="arrow" (click)="setFieldData(it, i, 1)" />
+                                    </div>
+                                    <div class="col">seat(s)</div>                                    
+                                </div>                                
                             </div>
                         </div>
                     </div>
