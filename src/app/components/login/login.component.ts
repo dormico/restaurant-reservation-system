@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
             console.log("Found user: " + g.username)
             this.authService.setActiveGuest(g);
             if(g.restaurant != ''){
-              this.restaurantAdminService.setRestaurant(g);
+              this.restaurantAdminService.loadExistingRestaurant();
               this.router.navigateByUrl("restaurant/" + g.restaurant + "/dashboard")
             } else {
               let rId = this.cartService.getVisitedId();

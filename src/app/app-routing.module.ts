@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InvoiceComponent } from './components/email/invoice/invoice.component';
 import { CartComponent } from './components/guest-components/cart/cart.component';
 import { FeedbackFormComponent } from './components/guest-components/feedback-form/feedback-form.component';
 import { FeedbackSubmittedComponent } from './components/guest-components/feedback-submitted/feedback-submitted.component';
@@ -20,6 +19,7 @@ import { EditMenuComponent } from './components/restaurant-components/edit-menu/
 import { IncomingOrdersComponent } from './components/restaurant-components/incoming-orders/incoming-orders.component';
 import { ReservationMapComponent } from './components/restaurant-components/reservation-map/reservation-map.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,9 +31,12 @@ const routes: Routes = [
   { path: 'feedbackSubmitted', component: FeedbackSubmittedComponent },
 
   { path: 'search', component: RestaurantsListComponent },
-  { path: 'restaurant/:id', component: RestaurantDetailsComponent },
+  { 
+    path: 'restaurant/:id', 
+    component: RestaurantDetailsComponent//, 
+    //canActivate: [MsalGuard] 
+  },
 
-  { path: 'email/invoice', component: InvoiceComponent },
   {
     path: 'restaurant/:id/reservation',
     component: TableReservationComponent,
@@ -96,17 +99,21 @@ const routes: Routes = [
   },
   {
     path: 'user/:id/feedback',
-    component: FeedbackFormComponent/*,
+    component: FeedbackFormComponent,
     data: { requiresLogin: true },
-    canActivate: [AuthGuard]*/
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: '/search', pathMatch: 'full' },
 
   { path: '**', component: PageNotFoundComponent }
 ];
 
+const isIframe = window !== window.parent && !window.opener;
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: !isIframe ? 'enabled' : 'disabled' // Don't perform initial navigation in iframes
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

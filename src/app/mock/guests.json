@@ -1,10 +1,10 @@
 {
     "guests": [
         {
-            "restaurant": "", 
-            "username": "Asd",
-            "password": "asd",
-            "email": "orsolyadk@gmail.com"
+            "restaurant": "4add7b18-91f7-4df4-ae2f-307bcc63921b", 
+            "username": "Fancy Restaurant",
+            "password": "fancy",
+            "email": "fancy@email.com"
         },
         {
             "restaurant": "", 
@@ -19,10 +19,10 @@
             "email": "pista@email.com"
         },
         {
-            "restaurant": "0", 
-            "username": "Whatever Restaurant",
-            "password": "myrestaurant",
-            "email": "myrestaurant@email.com"
+            "restaurant": "", 
+            "username": "Asd",
+            "password": "asd",
+            "email": "orsolyadk@gmail.com"
         }
     ]
 }

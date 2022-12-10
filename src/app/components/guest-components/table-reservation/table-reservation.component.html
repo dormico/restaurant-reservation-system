@@ -14,20 +14,20 @@
     </div>
     <div class="input-group mb-4" formGroupName="time">
         <span class="input-group-number bg-green p-2 rounded-start text-white">Time of your arrival</span>
-        <input type="number" aria-label="Hour" class="form-control" min="8" max="23" placeholder="13"
+        <input type="number" aria-label="Hour" class="form-control" min="8" max="23"
             formControlName="hour">
         <span class="input-group-text">hour</span>
-        <input type="number" aria-label="Mins" class="form-control" min="0" max="59" step="10" placeholder="00"
+        <input type="number" aria-label="Mins" class="form-control" min="0" max="59" step="10"
             formControlName="min">
         <span class="input-group-text">min</span>
     </div>
     <div *ngIf="!orderForTakeaway">
         <div class="input-group mb-4" formGroupName="duration">
             <span class="input-group-number bg-green p-2 rounded-start text-white">Length of your stay</span>
-            <input type="number" aria-label="Hour" class="form-control" min="0" max="5" placeholder="1"
+            <input type="number" aria-label="Hour" class="form-control" min="0" max="5"
                 formControlName="hour">
             <span class="input-group-text">hour(s)</span>
-            <input type="number" aria-label="Mins" class="form-control" min="0" max="30" step="30" placeholder="30"
+            <input type="number" aria-label="Mins" class="form-control" min="0" max="30" step="30"
                 formControlName="min">
             <span class="input-group-text">mins</span>
         </div>
@@ -84,7 +84,7 @@
                                 <div class="col">
                                     <span class="fw-bolder">{{field.data}}</span> seat(s)
                                     <span *ngIf="!chosen(it, i)" class="btn p-1" (click)="chooseTable(it, i)">Choose</span>
-                                    <span *ngIf="chosen(it, i)" class="btn p-1" (click)="removeTable(it, i)">Remove</span>
+                                    <span *ngIf="chosen(it, i)" class="btn p-1 bg-green" (click)="removeTable(it, i)">Remove</span>
                                 </div>
                             </div>
                         </div>

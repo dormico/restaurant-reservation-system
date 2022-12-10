@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { Order } from '../models/order.type';
+import { Order, OrderResults } from '../models/order.type';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -15,15 +15,22 @@ export class OrderService {
   constructor(private http: HttpClient,
     private config: ConfigService) { }
 
-  public getOrders(rId: string) : Observable<Order> | null{
-    let activeUrl = this.url + "restaurantitems/" + rId + "/" + rId;
-    let ord = this.http.get<Order>(activeUrl);
+  public getOrders(rId: string) : Observable<OrderResults> | null{
+    let activeUrl = this.url + "GetRestaurantOrders/" + rId;
+    let ord = this.http.get<OrderResults>(activeUrl);
+    console.log('fetched orders by URL ' + activeUrl);
+    console.log('fetched orders: ' + ord);
+    return ord;
+  }
+  public getOrdersToday(rId: string, date: string) : Observable<OrderResults>{
+    let activeUrl = this.url + "GetOrdersToday/" + rId + "?date=" + date;
+    let ord = this.http.get<OrderResults>(activeUrl);
     console.log('fetched orders by URL ' + activeUrl);
     console.log('fetched orders: ' + ord);
     return ord;
   }
   public addOrder(order: Order){
-    let activeUrl = this.url + "addOrder";
+    let activeUrl = this.url + "AppendNewOrder";
     console.log("Calling " + activeUrl);   
     order = this.formOrder(order); 
     let rJson = JSON.stringify(order);
@@ -44,7 +51,7 @@ export class OrderService {
       var dish = {
         dishId: o.dish.dishId,
         name: o.dish.name,
-        serving: o.servings,
+        servings: o.servings,
         price: o.price
       }
       dishes.push(dish);

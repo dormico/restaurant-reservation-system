@@ -15,15 +15,7 @@
             </div>
             <div class="border border-2 rounded-3 p-3">
                 <div class="row">
-                    <div class="col-10"><input type="text" class="form-control col-8 text-italic" id="experience" placeholder="My experience was..." required
-                            (ngModel)="feedback.experience"></div>
-                    <div class="col-2 text-center">
-                        <a (click)="setStars(1)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>   
-                        <a (click)="setStars(2)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
-                        <a (click)="setStars(3)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
-                        <a (click)="setStars(4)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
-                        <a (click)="setStars(5)"><img src="{{'../assets/icons/star.svg'}}" width=28 alt="star" /></a>
-                    </div>
+                    <div class="col-10"><input [(ngModel)]="review.text" name="reviewtext" type="text" class="form-control col-8 text-italic" id="experience" placeholder="My experience was..." required></div>
                 </div>
             </div>
         </div>
@@ -35,8 +27,7 @@
             <div class="border border-2 rounded-3 p-3">     
                 <div class="row">
                     <div class="col text-end">No</div>
-                    <div class="col"><input type="range" class="form-range" min="1" max="5" step="1" value="3" id="recommendation"
-                        (ngModel)="feedback.recommend"></div>                    
+                    <div class="col"><input [(ngModel)]="review.rating" name="reviewrating" type="range" class="form-range" min="1" max="5" step="1" value="3" id="recommendation"></div>
                     <div class="col">Absolutely</div>
                 </div>
             </div>       

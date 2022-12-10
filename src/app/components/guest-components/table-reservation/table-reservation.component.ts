@@ -136,7 +136,9 @@ export class TableReservationComponent implements OnInit {
     this.cartService.setDuration(duration);
     this.cartService.setTables(this.chosenTables);
 
-    this.cartService.initDishes();
+    if(this.cartService.restaurant.id != this.rId){
+      this.cartService.initDishes();
+    }   
 
     this.router.navigateByUrl('/restaurant/' + this.rId + '/menu');
   }

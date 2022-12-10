@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem } from 'src/app/models/restaurant.type';
 import { RestaurantAdminService } from 'src/app/services/restaurant-admin.service';
@@ -44,7 +44,7 @@ export class EditMenuComponent implements OnInit {
     return menu;
   }
   private initMenuArray() {
-    let menu = this.ras.myRestaurant.menu ?? [];
+    let menu = this.ras.Restaurant.menu ?? [];
     menu.forEach(item => {
       this.menuForm.push(this.fb.group({
         dishId: this.fb.control(item.dishId),
@@ -67,11 +67,10 @@ export class EditMenuComponent implements OnInit {
   public deleteItem(i: number): void {
     this.menuForm.removeAt(i);
   }
-  public goToMap() {
-    this.router.navigateByUrl('register/restaurant/map');
-  }
   public saveAndGoToMap() {
-    this.ras.myRestaurant.menu = this.getMenuList();
+    let r = this.ras.Restaurant;
+    r.menu = this.getMenuList();
+    this.ras.Restaurant = r;
     this.router.navigateByUrl('register/restaurant/map');
   }
 }

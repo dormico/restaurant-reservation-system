@@ -1,1 +1,36 @@
-<p>incoming-orders works!</p>
+<div class="container-fluid my-4">
+    <div class="row">      
+        <div class="col-2"></div>  
+        <div class="col bg-green m-2 p-2 rounded">
+            <h1 class="display-8 border-top border-bottom border-2 text-white text-center">
+                New orders
+            </h1>
+            <div *ngIf="ordersNew">
+                <div *ngFor="let order of ordersNew" class="bg-light rounded-3 m-2 p-2 fw-light">
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-normal">{{order.date}}, {{order.hour}}:{{order.min}}<span
+                            *ngIf="order.min == 0">0</span></div>                                            
+                        <div *ngIf="order.takeaway" class="text-end">
+                            <span class="badge rounded-3 bg-green text-light fw-normal">Takeaway</span>                        
+                        </div> 
+                    </div>
+                    <div class="border-bottom text-dark text-center">Dishes</div>                   
+                    <div *ngFor="let o of order.orders">
+                        {{ o.name }} x {{o.servings}}
+                    </div>
+                    <div *ngIf="order.tables.length != 0">
+                        <div class="border-bottom text-dark text-center">Tables</div>
+                        <div *ngFor="let table of order.tables">
+                            <span>{{table.row}}{{table.col}}</span>
+                        </div>
+                    </div> 
+                    <div class="text-center bg-green text-white-50 rounded-2">
+                        Ordered by {{order.guestEmail}}
+                    </div>               
+                </div>
+            </div>   
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+

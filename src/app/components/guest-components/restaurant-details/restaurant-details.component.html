@@ -99,7 +99,7 @@
                         </div>
                     </li>
                 </ul>
-                <div *ngIf="!restaurant.reviews" class="m-2 border-top border-bottom text-muted"> No reviews yet </div>
+                <div *ngIf="!restaurant.reviews||restaurant.reviews.length==0" class="m-2 border-top border-bottom text-muted"> No reviews yet </div>
             </div>
             <div class="card-footer text-muted">
                 <div class="row">

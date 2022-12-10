@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Feedback } from 'src/app/models/feedback.type';
+import { Review } from 'src/app/models/restaurant.type';
+import { CartService } from 'src/app/services/cart.service';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -8,18 +10,37 @@ import { Feedback } from 'src/app/models/feedback.type';
   styleUrls: ['./feedback-form.component.css']
 })
 export class FeedbackFormComponent implements OnInit {
+  public review: Review;
 
-  public feedback: Feedback;
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+  constructor(private router: Router,
+    private reviewService: ReviewService, 
+    private cartService: CartService) {
+    this.initReview();
   }
 
-  public setStars(n: number) {
-    console.log("You gave a " + n + " star rating!")
+  ngOnInit(): void {
+    this.initReview();
+  }
+
+  private initReview(): void {
+    this.review = {
+      id: "",
+      date: this.today(),
+      rating: 3,
+      text: "",
+      answer: ""
+    }
+  }
+  private today() {
+    return new Date().toISOString().split('T')[0];
+  }
+
+  private sendReview(): void{
+    this.reviewService.addReview(this.review, this.cartService.restaurant.id);
   }
 
   public onSubmit() {
+    this.sendReview();
     this.router.navigateByUrl('/feedbackSubmitted');
   }
 

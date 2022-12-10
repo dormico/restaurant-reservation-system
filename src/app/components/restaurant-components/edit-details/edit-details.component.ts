@@ -16,23 +16,23 @@ export class EditDetailsComponent implements OnInit {
   public hidden: boolean = true;
 
   public regForm = this.fb.group({
-    name: [this.ras.myRestaurant.name, Validators.required],
+    name: [this.ras.Restaurant.name, Validators.required],
     password: ['', Validators.required],
-    address: [this.ras.myRestaurant.address, Validators.required],
-    phone: [this.ras.myRestaurant.phone, Validators.required],
-    email: [this.ras.myRestaurant.email, Validators.required],
-    takeaway: [this.ras.myRestaurant.takeaway, Validators.required],
-    pricing: [this.ras.myRestaurant.pricing, Validators.required],
-    cardnum: [this.ras.myRestaurant.cardnum, Validators.required],
+    address: [this.ras.Restaurant.address, Validators.required],
+    phone: [this.ras.Restaurant.phone, Validators.required],
+    email: [this.ras.Restaurant.email, Validators.required],
+    takeaway: [this.ras.Restaurant.takeaway, Validators.required],
+    pricing: [this.ras.Restaurant.pricing, Validators.required],
+    cardnum: [this.ras.Restaurant.cardnum, Validators.required],
     time: this.fb.group({
-      openingH: [this.ras.myRestaurant.openingH, Validators.required],
-      openingM: [this.ras.myRestaurant.openingM, Validators.required],
-      closingH: [this.ras.myRestaurant.closingH, Validators.required],
-      closingM: [this.ras.myRestaurant.closingM, Validators.required],
+      openingH: [this.ras.Restaurant.openingH, Validators.required],
+      openingM: [this.ras.Restaurant.openingM, Validators.required],
+      closingH: [this.ras.Restaurant.closingH, Validators.required],
+      closingM: [this.ras.Restaurant.closingM, Validators.required],
     }),
     image: [''],
-    website: [this.ras.myRestaurant.website],
-    style: [this.ras.myRestaurant.style]
+    website: [this.ras.Restaurant.website],
+    style: [this.ras.Restaurant.style]
   });
 
   constructor(private fb: FormBuilder,
@@ -45,7 +45,7 @@ export class EditDetailsComponent implements OnInit {
     this.getStyles();
   }
   private setRestaurant() {
-    this.ras.myRestaurant;
+    this.ras.Restaurant;
   }
   private getStyles() {
     this.styles = this.restaurantService.getStyles();
@@ -60,20 +60,22 @@ export class EditDetailsComponent implements OnInit {
     this.ras.initUser(user);
   }
   private setRestaurantData(): void {
-    this.ras.myRestaurant.name = this.regForm.value.name;
-    this.ras.myRestaurant.address = this.regForm.value.address;
-    this.ras.myRestaurant.phone = this.regForm.value.phone;
-    this.ras.myRestaurant.email = this.regForm.value.email;
-    this.ras.myRestaurant.takeaway = this.regForm.value.takeaway;
-    this.ras.myRestaurant.pricing = this.regForm.value.pricing;
-    this.ras.myRestaurant.cardnum = this.regForm.value.cardnum;
-    this.ras.myRestaurant.openingH = this.regForm.get('time').value.openingH;
-    this.ras.myRestaurant.openingM = this.regForm.get('time').value.openingM;
-    this.ras.myRestaurant.closingH = this.regForm.get('time').value.closingH;
-    this.ras.myRestaurant.closingM = this.regForm.get('time').value.closingM;
-    this.ras.myRestaurant.image = this.regForm.value.image;
-    this.ras.myRestaurant.website = this.regForm.value.website;
-    this.ras.myRestaurant.style = this.regForm.value.style;
+    let r = this.ras.Restaurant;
+    r.name = this.regForm.value.name;
+    r.address = this.regForm.value.address;
+    r.phone = this.regForm.value.phone;
+    r.email = this.regForm.value.email;
+    r.takeaway = this.regForm.value.takeaway;
+    r.pricing = this.regForm.value.pricing;
+    r.cardnum = this.regForm.value.cardnum;
+    r.openingH = this.regForm.get('time').value.openingH;
+    r.openingM = this.regForm.get('time').value.openingM;
+    r.closingH = this.regForm.get('time').value.closingH;
+    r.closingM = this.regForm.get('time').value.closingM;
+    r.image = this.regForm.value.image;
+    r.website = this.regForm.value.website;
+    r.style = this.regForm.value.style;
+    this.ras.Restaurant = r;
   }
   public goToAddMenu() {
     this.initUser();

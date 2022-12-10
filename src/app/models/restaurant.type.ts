@@ -1,3 +1,6 @@
+export interface RestaurantResults{
+    restaurants: Restaurant[]
+}
 export interface Restaurant {
     id: string
     name: string
@@ -44,14 +47,8 @@ export interface MenuItem {
     price: number
     image?: string
 }
-// export interface MenuItemResponse {
-//     dishId: string
-//     name: string
-//     description: string
-//     price: number
-//     image?: string
-// }
 export interface Review {
+    id: string,
     date: string
     rating: number
     text?: string

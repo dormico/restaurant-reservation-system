@@ -44,10 +44,10 @@ export class ReservationMapComponent implements OnInit {
       let row = this.fb.array([])
       for (let j = 0; j < this.mapSize; j++) {
         let group;
-        if (this.ras.myRestaurant.tables.fields.length == this.mapSize) {
+        if (this.ras.Restaurant.tables.fields.length == this.mapSize) {
           group = {
-            type: this.fb.control(this.ras.myRestaurant.tables.fields[i][j].type),
-            data: this.fb.control(this.ras.myRestaurant.tables.fields[i][j].data)
+            type: this.fb.control(this.ras.Restaurant.tables.fields[i][j].type),
+            data: this.fb.control(this.ras.Restaurant.tables.fields[i][j].data)
           }
         } else {
           group = {
@@ -65,10 +65,10 @@ export class ReservationMapComponent implements OnInit {
     }
   }
   private initMap() {
-    if (this.ras.myRestaurant.tables.fields.length != 0) {
-      this.mapSize = this.ras.myRestaurant.tables.size;
+    if (this.ras.Restaurant.tables.fields.length != 0) {
+      this.mapSize = this.ras.Restaurant.tables.size;
       this.mapForm.patchValue({
-        mapName: this.ras.myRestaurant.tables.name
+        mapName: this.ras.Restaurant.tables.name
       });
     }
     this.setMapSize();
@@ -139,14 +139,16 @@ export class ReservationMapComponent implements OnInit {
     this.setFieldType(row, index, field);
   }
   public goToDashboard() {
-    this.ras.addRestaurant(this.ras.activeRestaurant);
+    this.ras.addRestaurant(this.ras.Restaurant);
     let rId = this.ras.Id;
     console.log("rId: " + rId);
     rId == '' ? rId = '0' : rId;
     this.router.navigateByUrl('restaurant/' + rId + '/dashboard');
   }
-  public saveAndGoToDashboard() {
-    this.ras.myRestaurant.tables = this.getMapObject();
+  public save() {
+    let r = this.ras.Restaurant;
+    r.tables = this.getMapObject();
+    this.ras.Restaurant = r;
     this.goToDashboard();
   }
 }

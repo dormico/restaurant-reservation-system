@@ -9,7 +9,6 @@ import { RestaurantDetailsComponent } from './components/guest-components/restau
 import { MenuComponent } from './components/guest-components/menu/menu.component';
 import { CartComponent } from './components/guest-components/cart/cart.component';
 import { FeedbackFormComponent } from './components/guest-components/feedback-form/feedback-form.component';
-import { NewRestaurantComponent } from './components/restaurant-components/new-restaurant/new-restaurant.component';
 import { NewGuestComponent } from './components/guest-components/new-guest/new-guest.component';
 import { DashboardComponent } from './components/restaurant-components/dashboard/dashboard.component';
 import { DailyOrdersComponent } from './components/restaurant-components/daily-orders/daily-orders.component';
@@ -28,8 +27,12 @@ import { TableReservationComponent } from './components/guest-components/table-r
 import { ReservationMapComponent } from './components/restaurant-components/reservation-map/reservation-map.component';
 import { EditDetailsComponent } from './components/restaurant-components/edit-details/edit-details.component';
 import { EditMenuComponent } from './components/restaurant-components/edit-menu/edit-menu.component';
-import { InvoiceComponent } from './components/email/invoice/invoice.component';
-import { OrderComponent } from './components/email/order/order.component';
+
+import { MsalModule, MsalGuard } from '@azure/msal-angular';
+import { PublicClientApplication, InteractionType  } from '@azure/msal-browser';
+import { LoginPopComponent } from './components/login-pop/login-pop.component';
+
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
   declarations: [
@@ -39,7 +42,6 @@ import { OrderComponent } from './components/email/order/order.component';
     MenuComponent,
     CartComponent,
     FeedbackFormComponent,
-    NewRestaurantComponent,
     NewGuestComponent,
     DashboardComponent,
     DailyOrdersComponent,
@@ -56,15 +58,30 @@ import { OrderComponent } from './components/email/order/order.component';
     ReservationMapComponent,
     EditDetailsComponent,
     EditMenuComponent,
-    InvoiceComponent,
-    OrderComponent
+    LoginPopComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MsalModule.forRoot(new PublicClientApplication({
+      auth: {
+        clientId: 'ec2c14e2-2347-498d-898c-58ce18af7b3c', // Application (client) ID from the app registration
+        authority: 'https://login.microsoftonline.com/8b88d967-723c-496b-9f24-8c58f29f5d24/oauth2/v2.0/authorize', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        redirectUri: 'http://localhost:4200'// This is your redirect URI
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
+      }
+    }), {
+      interactionType: InteractionType.Redirect, // MSAL Guard Configuration
+      authRequest: {
+        scopes: ['user.read']
+      }
+    }, null)
   ],
   providers: [],
   bootstrap: [AppComponent]

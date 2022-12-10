@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Order, OrderedDish } from '../models/order.type';
-import { Map, MenuItem, Restaurant } from '../models/restaurant.type';
+import { MenuItem, Restaurant } from '../models/restaurant.type';
+import { EmailService } from './email.service';
 import { OrderService } from './order.service';
 import { RestaurantService } from './restaurant.service';
 
@@ -11,8 +12,8 @@ import { RestaurantService } from './restaurant.service';
 export class CartService {
 
   private restaurantSubject: Subject<Restaurant> = new Subject<Restaurant>();
-  private visitedRestaurantId: string = "-1";  
-  private cart: Order; 
+  private visitedRestaurantId: string = "-1";
+  private cart: Order;
   private currentRestaurant: Restaurant = {
     id: "",
     name: "",
@@ -29,13 +30,14 @@ export class CartService {
     closingM: 0,
     menu: []
   };
-  
-  constructor(private restaurantService: RestaurantService, 
-    private orderService: OrderService) {
+
+  constructor(private restaurantService: RestaurantService,
+    private orderService: OrderService,
+    private emailService: EmailService) {
     this.restaurantSubject.subscribe(r => this.currentRestaurant = r);
     this.initCart();
   }
-  private initCart(){
+  private initCart() {
     this.cart = {
       id: -1,
       guestEmail: '',
@@ -90,11 +92,14 @@ export class CartService {
     this.cart.restaurantId = id;
   }
   public getReservationData(): Order {
-    return this.cart;
+    let reservation: Order;
+    reservation = this.cart;
+    return reservation;
   }
   public getOrders(): OrderedDish[] {
     this.cart.orders.forEach(element => {
       console.log("CartService: dish name:" + element.dish.name);
+
     });
     return this.cart.orders;
   }
@@ -148,7 +153,7 @@ export class CartService {
       this.cart.orders.splice(dishIndex, 1);
     }
   }
-  public initDishes(){
+  public initDishes() {
     this.cart.orders = [];
   }
   public getDishCount(dishId: string): number {
@@ -169,7 +174,11 @@ export class CartService {
     //   return this.sessionId;
     // }
   }
-  public saveOrder(){
+  public saveOrder() {
+    let order: Order = this.getReservationData();
+    this.emailService.sendOrderDetails(order);
+    this.emailService.sendInvoice(order);
     this.orderService.addOrder(this.cart);
+    this.initCart();
   }
 }

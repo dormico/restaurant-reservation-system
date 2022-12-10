@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from 'src/app/models/restaurant.type';
-import { RestaurantResults } from 'src/app/models/test.type';
+import { RestaurantResults } from 'src/app/models/restaurant.type';
 import { CartService } from 'src/app/services/cart.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 

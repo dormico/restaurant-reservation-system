@@ -1,11 +1,9 @@
-import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { InvoiceEmail, OrderEmail } from '../models/email.type';
 import { Order } from '../models/order.type';
 import { MenuItem } from '../models/restaurant.type';
-import { CartService } from './cart.service';
 import { ConfigService } from './config.service';
 import { RestaurantService } from './restaurant.service';
 
@@ -19,14 +17,13 @@ export class EmailService {
 
   constructor(private http: HttpClient,
     private config: ConfigService,
-    private cartService: CartService,
     private restaurantService: RestaurantService) { }
 
   public sendFeedback(): void {
     let activeUrl = this.url + "SendFeedbackEmail";
     let rlist = this.http.get(activeUrl);
   }
-  public sendInvoice(): void {
+  public sendInvoice(cart: Order): void {
     let activeUrl = this.url + "SendInvoiceEmail";
     var invoice: InvoiceEmail = {
       email: '',
@@ -35,7 +32,6 @@ export class EmailService {
       orders: [],
       sumPrice: 0
     }
-    let cart: Order = this.getOrderDetails();
     let menu: MenuItem[];
     invoice.email = cart.guestEmail;
     var sum: number = 0;
@@ -65,9 +61,8 @@ export class EmailService {
         console.log("Invoice sent to " + activeUrl);
       });
   }
-  public sendOrderDetails(): void {
+  public sendOrderDetails(cart: Order): void {
     let activeUrl = this.url + "SendOrderDetailsEmail";
-    let cart: Order = this.getOrderDetails();
     var order: OrderEmail = {
       email: cart.guestEmail,
       date: cart.date,
@@ -100,8 +95,5 @@ export class EmailService {
         .subscribe(r => console.log("Got message: "+ r));
         console.log("Order sent to " + activeUrl);
       });
-  }
-  private getOrderDetails(): Order {
-    return this.cartService.getReservationData();
   }
 }

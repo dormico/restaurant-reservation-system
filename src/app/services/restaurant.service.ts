@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { KitchenStyle, MenuItem, Restaurant } from '../models/restaurant.type';
-import { RestaurantResults } from '../models/test.type';
+import { KitchenStyle, MenuItem, Restaurant, RestaurantResults } from '../models/restaurant.type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class RestaurantService {
     return this.url;
   }
   public getRestaurantById(id: string): Observable<Restaurant> | null {
-    let activeUrl = this.url + "restaurantitems/" + id + "/" + id;
+    let activeUrl = this.url + "restaurantitems/" + id;
     let r = this.http.get<Restaurant>(activeUrl);
     console.log('fetched restaurants by URL ' + activeUrl);
     console.log('fetched restaurants: ' + r);

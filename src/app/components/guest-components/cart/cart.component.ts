@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order, OrderedDish } from 'src/app/models/order.type';
-import { MenuItem, Map } from 'src/app/models/restaurant.type';
+import { MenuItem } from 'src/app/models/restaurant.type';
 import { CartService } from 'src/app/services/cart.service';
 import { EmailService } from 'src/app/services/email.service';
 
@@ -56,8 +56,6 @@ export class CartComponent implements OnInit {
     this.router.navigateByUrl('/restaurant/' + rId + '/menu');
   }
   public goToPayment() {
-    this.emailService.sendOrderDetails();
-    this.emailService.sendInvoice();
     this.cartService.saveOrder();
     let uId;
     this.actRoute.params.subscribe(params => {
