@@ -23,8 +23,8 @@ export class NewGuestComponent implements OnInit {
   onSubmit() {
     if (this.pw1 === this.pw2) {
       this.guest.password = this.pw1;
-      this.authService.addGuest(this.guest);
-      this.router.navigateByUrl("\login");
+      this.authService.registerGuest(this.guest);
+      this.router.navigateByUrl("/register/confirmation");
     } else {
       console.log("Passwords doesn't match!");
     }

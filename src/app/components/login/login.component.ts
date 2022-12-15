@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
     private router: Router, 
     private cartService: CartService, 
-    private restaurantAdminService: RestaurantAdminService) { }
+    private ras: RestaurantAdminService) { }
 
   ngOnInit(): void { }
 
   public initRestaurant(){
-    this.restaurantAdminService.initRestaurant();
+    this.ras.initRestaurant();
   }
 
   onSubmit() {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
             console.log("Found user: " + g.username)
             this.authService.setActiveGuest(g);
             if(g.restaurant != ''){
-              this.restaurantAdminService.loadExistingRestaurant();
+              this.ras.loadExistingRestaurant();
               this.router.navigateByUrl("restaurant/" + g.restaurant + "/dashboard")
             } else {
               let rId = this.cartService.getVisitedId();

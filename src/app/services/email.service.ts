@@ -19,10 +19,6 @@ export class EmailService {
     private config: ConfigService,
     private restaurantService: RestaurantService) { }
 
-  public sendFeedback(): void {
-    let activeUrl = this.url + "SendFeedbackEmail";
-    let rlist = this.http.get(activeUrl);
-  }
   public sendInvoice(cart: Order): void {
     let activeUrl = this.url + "SendInvoiceEmail";
     var invoice: InvoiceEmail = {
@@ -42,7 +38,7 @@ export class EmailService {
         price: item.price
       }
       invoice.orders.push(o);
-      sum += item.price*item.servings;
+      sum += item.price * item.servings;
     });
     invoice.sumPrice = sum;
     this.restaurantService.getRestaurantById(cart.restaurantId)
@@ -54,10 +50,10 @@ export class EmailService {
         let iJson = JSON.stringify(invoice);
         console.log("Sending the json: " + iJson);
         this.http.post<string>(activeUrl, iJson)
-        .pipe(
-          catchError(this.config.handleError)
-        )
-        .subscribe(r => console.log("Got message: "+ r));
+          .pipe(
+            catchError(this.config.handleError)
+          )
+          .subscribe(r => console.log("Got message: " + r));
         console.log("Invoice sent to " + activeUrl);
       });
   }
@@ -89,11 +85,25 @@ export class EmailService {
         let oJson = JSON.stringify(order);
         console.log("Sending the json: " + oJson);
         this.http.post<string>(activeUrl, oJson)
-        .pipe(
-          catchError(this.config.handleError)
-        )
-        .subscribe(r => console.log("Got message: "+ r));
+          .pipe(
+            catchError(this.config.handleError)
+          )
+          .subscribe(r => console.log("Got message: " + r));
         console.log("Order sent to " + activeUrl);
       });
+  }  
+  public sendRegConfirmEmail(email: string, code: string): void {
+    let activeUrl = this.url + "SendRegConfirmationEmail";  
+    var confData = {
+      email: email,
+      code: code
+    }
+    let cJson = JSON.stringify(confData);
+    console.log("Sending the json: " + cJson);
+    this.http.post<any>(activeUrl, cJson)
+      .pipe(
+        catchError(this.config.handleError)
+      )
+      .subscribe(c => console.log("Got message: " + c.message));
   }
 }

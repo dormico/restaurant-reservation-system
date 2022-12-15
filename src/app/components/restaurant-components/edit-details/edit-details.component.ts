@@ -20,7 +20,7 @@ export class EditDetailsComponent implements OnInit {
     password: ['', Validators.required],
     address: [this.ras.Restaurant.address, Validators.required],
     phone: [this.ras.Restaurant.phone, Validators.required],
-    email: [this.ras.Restaurant.email, Validators.required],
+    email: ['', Validators.required],
     takeaway: [this.ras.Restaurant.takeaway, Validators.required],
     pricing: [this.ras.Restaurant.pricing, Validators.required],
     cardnum: [this.ras.Restaurant.cardnum, Validators.required],
@@ -57,7 +57,7 @@ export class EditDetailsComponent implements OnInit {
       email: this.regForm.value.email,
       password: this.regForm.value.password
     }
-    this.ras.initUser(user);
+    //this.ras.initUser(user);
   }
   private setRestaurantData(): void {
     let r = this.ras.Restaurant;
@@ -76,6 +76,7 @@ export class EditDetailsComponent implements OnInit {
     r.website = this.regForm.value.website;
     r.style = this.regForm.value.style;
     this.ras.Restaurant = r;
+    this.ras.Password = this.regForm.value.password;
   }
   public goToAddMenu() {
     this.initUser();

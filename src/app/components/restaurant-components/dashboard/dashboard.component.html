@@ -127,7 +127,7 @@
             <h1 class="display-8 border-top border-bottom border-2 text-white text-center">
                 New orders
             </h1>
-            <div *ngIf="ordersNew">
+            <div *ngIf="ordersNew&&ordersNew.length!=0">
                 <div *ngFor="let order of ordersNew" class="bg-light rounded-3 m-2 p-2 fw-light">
                     <div class="d-flex justify-content-between">
                         <div class="fw-normal">{{order.date}}, {{order.hour}}:{{order.min}}<span

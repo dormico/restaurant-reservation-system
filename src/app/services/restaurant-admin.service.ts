@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
-import { Guest } from '../models/guest.type';
-import { Restaurant } from '../models/restaurant.type';
+import { Restaurant, RestaurantRegistration } from '../models/restaurant.type';
 import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
 import { RestaurantService } from './restaurant.service';
@@ -14,8 +13,8 @@ import { RestaurantService } from './restaurant.service';
 })
 export class RestaurantAdminService {
 
+  private regRestaurant: RestaurantRegistration;
   private myRestaurant: BehaviorSubject<Restaurant>;
-  private user: Guest
   private url: string
 
   constructor(private restaurantService: RestaurantService,
@@ -33,6 +32,12 @@ export class RestaurantAdminService {
   }
   public set Restaurant(r: Restaurant) {
     this.myRestaurant.next(r);
+  }
+  public get Password() {
+    return this.regRestaurant.password;
+  }
+  public set Password(pass: string) {
+    this.regRestaurant.password = pass;
   }
   public subscribeToRestaurant(): Observable<Restaurant> {
     return this.myRestaurant;
@@ -59,25 +64,21 @@ export class RestaurantAdminService {
       rating: 0,
       image: ""
     });
-  }
-  public initUser(user: Guest): void {
-    this.user = user;
+    this.regRestaurant = {
+      restaurantItem: this.myRestaurant.value,
+      password: ""
+    };
   }
   public loadExistingRestaurant(): void {
-    console.log("LOADING RESTAURANT...");
     this.authService.getActiveGuest()
       .subscribe(g => {
-        this.user = g;
         if (g.restaurant != '') {
           this.restaurantService.getRestaurantById(g.restaurant)
             ?.subscribe(r => {
               if (r) {
                 this.myRestaurant.next(r);
-                console.log("Got restaurant " + r.name + " for user " + g.username);
-                console.log("RESTAURANT LOADED!")
               } else {
                 this.myRestaurant = null;
-                console.log("Restaurant not yet loaded for " + g.username);
               }
             });
         }
@@ -86,43 +87,18 @@ export class RestaurantAdminService {
         }
       });
   }
-  private setUserRestaurant(rId: string): void {
-    this.user.restaurant = rId;
-  }
-  private registerUser(): void {
-    this.authService.addGuest(this.user);
-  }
-  // public setRestaurant(g: Guest) {
-  //   this.restaurantService.getRestaurantById(g.restaurant)?.subscribe(
-  //     rest => {
-  //       if (rest) this.myRestaurant.next(rest);
-  //       else this.myRestaurant = null;
-  //     }
-  //   );
-  //   console.log("Id: " + this.myRestaurant.value.id + "Restaurant name: " + this.myRestaurant.value.name);
-  // }
-  public addRestaurant(restaurant: Restaurant): void {
+  public addRestaurant(): void {
+    if(this.Restaurant.email == "") return;    
+    this.regRestaurant.restaurantItem = this.Restaurant;
     let activeUrl = this.url + "AddRestaurantOrchestration_HttpStart";
     console.log("Calling " + activeUrl);
-    console.log("Sending the json: " + restaurant);
-    this.http.post<any>(activeUrl, restaurant)
+    console.log("Sending the json: " + JSON.stringify(this.regRestaurant));
+    this.http.post<any>(activeUrl, this.regRestaurant)
       .pipe(
         catchError(this.config.handleError)
       )
-      .subscribe(rId => {
-        console.log("Got server response: " + rId);
-        this.myRestaurant.value.id = rId;
-        if (this.myRestaurant.value.id != "") {
-          console.log("User registration");
-          this.setUserRestaurant(rId);
-          this.registerUser();
-        }
-      });
-    console.log("New restaurant successfully added with ID" + this.myRestaurant.value.id);
-  }
-  public updateRestaurant(restaurant: Restaurant): Observable<Restaurant> {
-
-    //TODO: implement on backend
-    return
+      .subscribe(res => {
+        console.log("Restaurant created successfully");
+      });    
   }
 }

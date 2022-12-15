@@ -1,6 +1,10 @@
 export interface RestaurantResults{
     restaurants: Restaurant[]
 }
+export interface RestaurantRegistration{
+    password: string,
+    restaurantItem: Restaurant
+}
 export interface Restaurant {
     id: string
     name: string

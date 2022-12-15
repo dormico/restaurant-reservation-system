@@ -20,6 +20,7 @@ import { IncomingOrdersComponent } from './components/restaurant-components/inco
 import { ReservationMapComponent } from './components/restaurant-components/reservation-map/reservation-map.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { MsalGuard } from '@azure/msal-angular';
+import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'register/restaurant/details', component: EditDetailsComponent },
   { path: 'register/restaurant/menu', component: EditMenuComponent },
   { path: 'register/restaurant/map', component: ReservationMapComponent },
+  { path: 'register/confirmation', component: RegistrationConfirmationComponent },
   { path: 'newpass', component: NewPasswordComponent },
   { path: 'feedbackSubmitted', component: FeedbackSubmittedComponent },
 

@@ -31,6 +31,7 @@ import { EditMenuComponent } from './components/restaurant-components/edit-menu/
 import { MsalModule, MsalGuard } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType  } from '@azure/msal-browser';
 import { LoginPopComponent } from './components/login-pop/login-pop.component';
+import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -58,7 +59,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ReservationMapComponent,
     EditDetailsComponent,
     EditMenuComponent,
-    LoginPopComponent
+    LoginPopComponent,
+    RegistrationConfirmationComponent
   ],
   imports: [
     BrowserModule,

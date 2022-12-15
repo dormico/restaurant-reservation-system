@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Guest } from '../models/guest.type';
-import { guests } from '../../app/mock/guests.json';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { EmailService } from './email.service';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router) { }
-  
+  private url: string = "https://auth-func-app.azurewebsites.net/api/";
   private nullGuest: Guest = { restaurant: "", username: "", email: "", password: "" }
-  private guests: Guest[] = guests;
-  private activeGuest = new BehaviorSubject<Guest>(this.nullGuest/*{ username: "Asd", email: "asd@email.com", password: "asd" }*/);
+  private registrationGuest: Guest;
+  private registrationCode = new BehaviorSubject<string>("");
+  private activeGuest = new BehaviorSubject<Guest>(this.nullGuest);
+
+  constructor(private http: HttpClient,
+    private config: ConfigService,
+    private router: Router,
+    private emailService: EmailService) {
+    this.registrationGuest = {
+      restaurant: "",
+      username: "",
+      email: "",
+      password: ""
+    };
+  }
 
   public isAuthenticated(): boolean {
 
@@ -28,13 +43,38 @@ export class AuthService {
     }
     return this.activeGuest.value === this.nullGuest ? false : true;
   }
-  public getGuestName(g: Guest): Observable<Guest> {
-    let guest = guests.find(element => element.email == g.email && element.password == g.password);
-    return guest ? of(guest) : of(this.nullGuest);
+  public getGuestName(g: Guest): Observable<Guest> {    
+    let activeUrl = this.url + "GetUser/" + g.email;
+    var user = this.http.get<Guest>(activeUrl);
+    return user;
   }
   public addGuest(g: Guest) {
-    this.guests.push(g);
-    console.log("AuthService: New user added: " + JSON.stringify(g));
+    let activeUrl = this.url + "AddUser";
+    let gJson = JSON.stringify(g);
+    console.log("Sending the json: " + gJson);
+    this.http.post<string>(activeUrl, gJson)
+       .pipe(
+         catchError(this.config.handleError)
+       )
+       .subscribe(u => {
+         console.log("AuthService: New user added: " + JSON.stringify(u));
+       });   
+  }
+
+  public getRegCode():BehaviorSubject<string>{
+    return this.registrationCode;
+  }
+  public addRegisteredGuest(){
+    this.addGuest(this.registrationGuest);
+  }
+  public registerGuest(g: Guest): void {
+    this.registrationGuest = g;
+    this.sendRegConfirmEmail();
+  }
+  public sendRegConfirmEmail(): void {
+    let code = (Math.floor(Math.random() * (99999 - 10000) + 10000)).toString();
+    this.registrationCode.next(code);
+    this.emailService.sendRegConfirmEmail(this.registrationGuest.email, code);
   }
   public getActiveGuest(): Observable<Guest> {
     console.log("active guest mail: " + this.activeGuest.value.email);

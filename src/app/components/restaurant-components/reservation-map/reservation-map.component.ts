@@ -139,7 +139,7 @@ export class ReservationMapComponent implements OnInit {
     this.setFieldType(row, index, field);
   }
   public goToDashboard() {
-    this.ras.addRestaurant(this.ras.Restaurant);
+    this.ras.addRestaurant();
     let rId = this.ras.Id;
     console.log("rId: " + rId);
     rId == '' ? rId = '0' : rId;

@@ -1,0 +1,24 @@
+<form novalidate autocomplete="off" #form="ngForm" class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 text-center mt-4">
+            <div class="display-6 my-4">Verify your e-mail</div>
+            <div class="form-group mt-4">
+                <label class="display-8">Code</label>
+                <input type=text class="form-control form-control-md" placeholder="Code" name="code"
+                    [(ngModel)]="code" required maxlength="5">
+            </div>
+            <div *ngIf="code != expectedCode && code != ''" class="text-start mt-3 d-flex justify-content-between">
+                <span>Code does not match</span>
+                <a class="col-sm text-end" type="button" (click)="resendVerificationCode()">Resend code</a>
+            </div>
+            <div *ngIf="code == expectedCode" class="px-2 mt-4">
+                <span>E-mail succesfully verified!</span>
+                <div class="row">
+                    <button class="btn btn-primary" (click)="userVerified()" type="button">Sign in</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</form>
