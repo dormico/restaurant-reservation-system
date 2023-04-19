@@ -12,7 +12,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private url: string = "https://auth-func-app.azurewebsites.net/api/";
+  private url: string = "https://auth-func-app-2.azurewebsites.net/api/";
   private nullGuest: Guest = { restaurant: "", username: "", email: "", password: "" }
   private registrationGuest: Guest;
   private registrationCode = new BehaviorSubject<string>("");

@@ -12,7 +12,7 @@ import { RestaurantService } from './restaurant.service';
 })
 export class EmailService {
 
-  private url: string = "https://email-func-app.azurewebsites.net/api/"
+  private url: string = "https://email-func-app-2.azurewebsites.net/api/"
   //private url: string = "http://localhost:7071/api/"
 
   constructor(private http: HttpClient,

@@ -9,7 +9,7 @@ import { ConfigService } from './config.service';
 })
 export class ReviewService {
 
-  private url: string = "https://review-func-app.azurewebsites.net/api/"
+  private url: string = "https://review-func-app-2.azurewebsites.net/api/"
   //private url: string = "http://localhost:7071/api/"
 
   constructor(private http: HttpClient,

@@ -9,7 +9,7 @@ import { ConfigService } from './config.service';
   providedIn: 'root'
 })
 export class OrderService {
-  private url: string = "https://orders-func-app.azurewebsites.net/api/"
+  private url: string = "https://orders-func-app-2.azurewebsites.net/api/"
   //private url: string = "http://localhost:7071/api/"
 
   constructor(private http: HttpClient,
