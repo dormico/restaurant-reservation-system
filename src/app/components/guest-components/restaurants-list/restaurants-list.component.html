@@ -1,4 +1,4 @@
-<div class="list-group" *ngIf="restaurantResults">
+<div class="list-group" *ngIf="restaurantResults && restaurantResults.restaurants.length > 0">
     <nav *ngFor="let restaurant of restaurantResults.restaurants" [routerLink]="['/restaurant', restaurant.id]"
         class="list-group-item list-group-item-action flex-column d-flex ">
         <div class="row align-items-center">
@@ -28,4 +28,7 @@
             </div>
         </div>
     </nav>
+</div>
+<div *ngIf="!restaurantResults || restaurantResults.restaurants.length == 0">
+    <div class="display-4 text-center my-4">Sorry, there aren't any restaurants yet.</div>
 </div>

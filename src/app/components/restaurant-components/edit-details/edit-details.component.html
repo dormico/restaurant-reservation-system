@@ -1,6 +1,133 @@
-<form [formGroup]="regForm" class="container-fluid display-8 row">
+<form [formGroup]="regForm" class="container-fluid">
     <h1 class="display-4 text-center text-uppercase border-bottom border-top border-2 my-4">Details</h1>
-    <div class="row me-0">
+    <div class="border rounded-2 bg-light m-4 p-2 text-center row">
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Restaurant's Name
+            </span>
+            <input class="text-center display-7 text-muted text-italic rounded border col" type="text"
+                formControlName="name">
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                E-mail
+            </span>
+            <input class="text-center display-7 text-muted text-italic rounded border col" type="text"
+                formControlName="email">
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Password
+            </span>
+            <input *ngIf="hidden" class="text-center display-7 text-muted text-italic rounded border col-5"
+                type="password" formControlName="password">
+            <input *ngIf="!hidden" class="text-center display-7 text-muted text-italic rounded border col-5" type="text"
+                formControlName="password">
+            <span class="my-0 border px-2 py-1 col-1" (click)="hidden = !hidden">
+                <img src="{{'../assets/icons/hidden.png'}}" width="30" alt="password" />
+            </span>
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Card Number
+            </span>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                formControlName="cardnum">
+        </div>
+    </div>
+
+    <div class="border border-2 rounded-2 bg-white m-4 p-2 text-center row">
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Telephone
+            </span>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="+12 3 456 7890" formControlName="phone">
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Address
+            </span>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="0123 City Street 33" formControlName="address">
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Website
+            </span>
+            <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                placeholder="www.myrestaurant.com" formControlName="website">
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Image
+            </span>
+            <input class="text-center display-8 rounded bg-white form-control col" type="file" id="img" name="img"
+                accept="image/*" formControlName="image">
+        </div>
+    </div>
+
+    <div class="border rounded-2 bg-light m-4 mb-2 p-2 text-center row">        
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Style
+            </span>
+            <input class="text-center display-8 text-muted text-italic rounded border col" list="datalistOptions"
+                formControlName="style">
+            <datalist id="datalistOptions">
+                <option *ngFor="let style of styles" [value]="style">{{style}}</option>
+            </datalist>
+        </div>        
+        <div class="col-12 my-2 row">
+            <span class="display-7 col-6">
+                Opening hours
+            </span>
+            <div class="input-group col px-0" formGroupName="time">
+                <input type="number" aria-label="Hour" class="form-control rounded-start text-muted text-italic " min="8" max="23"
+                    formControlName="openingH">
+                <span class="input-group-text">:</span>
+                <input type="number" aria-label="Mins" class="form-control text-muted text-italic " min="0" max="59" step="10"
+                    formControlName="openingM">
+                <span class="input-group-text">-</span>
+                <input type="number" aria-label="Hour" class="form-control text-muted text-italic " min="8" max="23"
+                    formControlName="closingH">
+                <span class="input-group-text">:</span>
+                <input type="number" aria-label="Mins" class="form-control text-muted text-italic " min="0" max="59" step="10"
+                    formControlName="closingM">
+            </div>
+        </div>
+        <div class="col-12 my-2 row">
+            <span class="display-7 col">
+                Price category
+            </span>
+            <div class="col row  mx-2">
+                <div class="col-1 p-0 text-end">
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                </div>
+                <span class="col ps-0">
+                    <input class="form-control form-control-sm form-range mx-2 border-0" type="range" min="1"
+                        max="5" step="1" formControlName="pricing">
+                </span>
+                <div class="col-3 p-0">
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                    <img src="{{'../assets/icons/currency-dollar.svg'}}" width="16" alt="dollar" />
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-2 row">
+            <span class="display-7 col">
+                Takeaway
+            </span>
+            <div class="col">
+                <input class="form-check-input m-0 display-7" type="checkbox" formControlName="takeaway">
+            </div>
+        </div>        
+    </div>
+
+    <!-- <div class="row me-0">
         <div class="my-2 col row">
             <div class="col-1 mx-2">
                 <img src="{{'../assets/icons/name.png'}}" width="24" alt="name" />
@@ -21,8 +148,8 @@
             </div>
             <input *ngIf="hidden" class="text-center display-8 text-muted text-italic rounded border col"
                 type="password" formControlName="password">
-            <input *ngIf="!hidden" class="text-center display-8 text-muted text-italic rounded border col"
-                type="text" formControlName="password">
+            <input *ngIf="!hidden" class="text-center display-8 text-muted text-italic rounded border col" type="text"
+                formControlName="password">
         </div>
     </div>
     <div class="row me-0">
@@ -60,7 +187,7 @@
             <input class="text-center display-8 text-muted text-italic rounded border col" type="text"
                 formControlName="website">
         </div>
-    </div>
+    </div> 
     <div class="row me-0">
         <div class="my-2 col row">
             <div class="col-1 mx-2">
@@ -126,8 +253,8 @@
                 <input class="form-check-input" type="checkbox" formControlName="takeaway">
             </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-end">
-        <div class="btn btn-primary" (click)="goToAddMenu()">Next</div>
+    </div>-->
+    <div class="text-end me-4">
+        <button class="btn btn-primary" [disabled]="regForm.invalid" type="button" (click)="goToAddMenu()">Next</button>
     </div>
 </form>
